@@ -1,5 +1,12 @@
 # flagtag
 
+
+
+## Modules
+
+* sqlite
+* 
+
 ## Project setup
 ```
 npm install
