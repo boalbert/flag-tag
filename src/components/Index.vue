@@ -5,23 +5,22 @@
 			<div>
 				<h2>💡</h2>
 			</div>
-			<div class="logo">
+			<div>
 				<h1>FlagTag</h1>
 			</div>
 			<div>
 				<!-- Dölj om man ej är inloggad  -->
 				<!-- Alternativt visa Log in / Sign up om man ej är inloggad -->
-				<a href="#" class="button__profile" v-if="signedIn">👱🏻‍♀️ Profile </a>
-				<a href="#" class="button__profile" v-else>🚪 Sign up / Sign in</a>
+				<router-link to="/profile" v-if="signedIn">👱🏻‍♀️ Profile</router-link>
+				<router-link to="/register" v-else>🚪 Sign up / Sign in</router-link>
 			</div>
 		</header>
 
 		<main>
 			<div class="game-mode-container">
-				<button class="button__gameOptions" @click="practice">Practice</button>
-				<button class="button__gameOptions" @click="challenge">
-					Challenge
-				</button>
+				<!-- Ersätt med <router-link> till varje game-mode? -->
+				<button class="button__gameOptions">Practice</button>
+				<button class="button__gameOptions">Challenge</button>
 			</div>
 
 			<!-- Ersätts med komponent <highscore />? -->
@@ -56,7 +55,7 @@ export default {
 	},
 	data() {
 		return {
-			signedIn: true,
+			signedIn: false,
 		}
 	},
 	methods: {},
@@ -107,6 +106,7 @@ main {
 	flex-direction: column;
 }
 
+/* Highscore item */
 aside {
 }
 
@@ -122,13 +122,10 @@ button {
 	background-color: #007bff;
 	text-transform: uppercase;
 	font-size: 25px;
-	width: 250px;
+	width: 300px;
 	height: 100px;
 	border: 0;
 	margin: 25px 0 25px 0;
-}
-
-.button__profile {
 }
 
 .button__darkMode {
