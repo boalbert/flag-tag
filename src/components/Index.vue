@@ -1,14 +1,14 @@
 <template>
 	<section>
+		<!-- Ersätt med komponent 'header'? -->
 		<header>
 			<div>
-				<button class="button__darkMode">💡</button>
+				<h2>💡</h2>
 			</div>
 			<div class="logo">
 				<h1>FlagTag</h1>
 			</div>
 			<div>
-				<!-- v-if="signedIn" -->
 				<!-- Dölj om man ej är inloggad  -->
 				<!-- Alternativt visa Log in / Sign up om man ej är inloggad -->
 				<a href="#" class="button__profile" v-if="signedIn">👱🏻‍♀️ Profile </a>
@@ -17,15 +17,11 @@
 		</header>
 
 		<main>
-			<div></div>
 			<div class="game-mode-container">
 				<button class="button__gameOptions" @click="practice">Practice</button>
 				<button class="button__gameOptions" @click="challenge">
 					Challenge
 				</button>
-				<!-- <button class="button__gameOptions" @click="login">
-					Log in / Sign Up
-				</button> -->
 			</div>
 
 			<!-- Ersätts med komponent <highscore />? -->
@@ -37,11 +33,11 @@
 				<!-- <ol v-for="score in highscore" key="score.id"> -->
 				<ol>
 					<!-- <li>{{ score.usename }} - {{ score.points }}</li> -->
-					<li>Player 1</li>
-					<li>Player 2</li>
-					<li>Player 3</li>
-					<li>Player 4</li>
-					<li>Player 5</li>
+					<li>Name - 213p</li>
+					<li>Username - 200p</li>
+					<li>Player - 190p</li>
+					<li>User - 150p</li>
+					<li>Name - 50p</li>
 				</ol>
 			</aside>
 		</main>
@@ -60,7 +56,7 @@ export default {
 	},
 	data() {
 		return {
-			signedIn: false,
+			signedIn: true,
 		}
 	},
 	methods: {},
@@ -83,10 +79,13 @@ p {
 
 ol,
 li {
-	font-size: 25px;
+	font-size: 20px;
+}
+
+li {
+	padding: 5px;
 }
 section {
-	/* border: 2px solid blue; */
 	display: flex;
 	flex-direction: column;
 	width: 95%;
@@ -97,35 +96,21 @@ section {
 header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-
 	align-items: baseline;
-	height: 150px;
+	border-bottom: 2px solid lightgray;
+	margin-bottom: 50px;
+	background-color: rgb(247, 247, 247);
 }
 
 main {
 	display: flex;
 	flex-direction: column;
-	/* border: 2px solid red; */
 }
 
 aside {
-	/* border: 2px solid orange; */
-	padding: 5px;
 }
 
 footer {
-	/* border: 2px solid green; */
-}
-
-.logo {
-	text-align: center;
-	/* border: 2px solid green; */
-}
-
-.game-mode-container {
-	display: flex;
-	flex-direction: column;
-	margin: 0 auto;
 }
 
 button {
@@ -134,7 +119,8 @@ button {
 }
 
 .button__gameOptions {
-	background-color: cornflowerblue;
+	background-color: #007bff;
+	text-transform: uppercase;
 	font-size: 25px;
 	width: 250px;
 	height: 100px;
@@ -143,25 +129,26 @@ button {
 }
 
 .button__profile {
-	/* color: red; */
 }
 
 .button__darkMode {
 	font-size: 25px;
 	border: 0;
 	background-color: none;
-	/* padding: 15px; */
+}
+
+.game-mode-container {
+	display: flex;
+	flex-direction: column;
+	grid-column-start: 2;
+	margin: 0 auto;
 }
 
 @media screen and (min-width: 1050px) {
-	body {
-	}
-	header {
-	}
-
 	main {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: repeat(3, 1fr);
+		justify-items: stretch;
 	}
 }
 </style>
