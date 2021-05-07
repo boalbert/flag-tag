@@ -53,21 +53,34 @@ export default {
 			console.log('Emitted username: ' + accountDetails.username)
 			console.log('Emitted password: ' + accountDetails.password)
 
-			fetch('http://localhost:3030/users', {
+			let credentials = {
+				username: accountDetails.username,
+				password: accountDetails.password,
+			}
+
+			fetch('http://localhost:3000/users', {
 				method: 'POST',
 				headers: {
-					'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+					'Content-type': 'application/json',
 				},
-				body: JSON.stringify({
-					accountDetails,
-				}),
+
+				body: JSON.stringify(credentials),
 			})
 				.then((res) => {
 					// Lägg till metod / hantering av svar från server
-					console.log('Response: ', res)
+					console.log(res)
+					if (res.status === 400) {
+						// TODO Lägg till felmeddelande Array
+						console.log('Failed to create account')
+
+						// Lägg till hantering när konto är skapat
+					} else if (res.status === 200) {
+						console.log('Account created')
+					}
 				})
 				.catch((err) => {
 					// Lägg till felmeddelande i frontend
+					console.log('Inside catch')
 					console.log('Error message: ', err)
 				})
 		},
@@ -79,7 +92,6 @@ export default {
 <style>
 .form-container {
 	margin: 0 auto;
-	/* border: 2px solid lightgray; */
 	border: 1px solid rgb(243, 243, 243);
 	padding: 40px 80px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
