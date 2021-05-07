@@ -2,14 +2,26 @@
 	<div>
 		<h2>🔐</h2>
 		<h1>Sign In</h1>
-		<form>
+		<form @submit.prevent="submitLoginDetails(loginDetails)">
 			<div class="input__container">
 				<label for="username">Username</label>
-				<input required type="text" placeholder="Username" name="username" />
+				<input
+					required
+					type="text"
+					placeholder="Username"
+					name="username"
+					v-model="loginDetails.username"
+				/>
 
 				<label for="username">Password</label>
-				<input required type="text" placeholder="Password" name="password" />
-				<button @click="login" class="button_signup-login button--green">
+				<input
+					required
+					type="text"
+					placeholder="Password"
+					name="password"
+					v-model="loginDetails.password"
+				/>
+				<button type="submit" class="button_signup-login button--green">
 					Log In
 				</button>
 			</div>
@@ -20,6 +32,21 @@
 <script>
 export default {
 	name: 'LoginForm',
+	data() {
+		return {
+			loginDetails: {
+				username: '',
+				password: '',
+			},
+		}
+	},
+	methods: {
+		submitLoginDetails(loginDetails) {
+			this.$emit('login-account', loginDetails)
+			this.loginDetails.username = ''
+			this.loginDetails.password = ''
+		},
+	},
 }
 </script>
 

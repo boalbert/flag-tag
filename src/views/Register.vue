@@ -4,7 +4,7 @@
 
 		<div class="form-container">
 			<div v-if="accountExists">
-				<LoginForm />
+				<LoginForm @login-account="loginAccount" />
 			</div>
 			<div v-else>
 				<SignUpForm @register-account="postNewAccount" />
@@ -25,6 +25,8 @@
 			>
 				Oops! I need to create an account.
 			</p>
+
+			<p v-if="accountExists">Logged in as: {{ loggedInUser }}</p>
 		</div>
 	</section>
 </template>
@@ -45,6 +47,7 @@ export default {
 	data() {
 		return {
 			accountExists: false,
+			loggedInUser: '',
 		}
 	},
 	methods: {
@@ -82,6 +85,24 @@ export default {
 					// Lägg till felmeddelande i frontend
 					console.log('Inside catch')
 					console.log('Error message: ', err)
+				})
+		},
+		loginAccount(loginDetails) {
+			const username = loginDetails.username
+			const password = loginDetails.password
+
+			console.log('Username: ' + username)
+			console.log('Password: ' + password)
+
+			fetch(`http://localhost:3000/users/${username}/${password}`)
+				.then((response) => response.json())
+				.then((response) => {
+					console.log(response.users.length)
+					if (response.users.length > 0) {
+						console.log('Login Successful!' + response.users[0].userName)
+						this.accountExists = true
+						this.loggedInUser = response.users[0].userName
+					}
 				})
 		},
 	},
