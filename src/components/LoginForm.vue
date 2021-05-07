@@ -1,14 +1,16 @@
 <template>
 	<div>
-		<h1>👽</h1>
-		<h1>Sign in</h1>
-		<h3>Please enter you details</h3>
+		<h2>🔐</h2>
+		<h1>Sign In</h1>
 		<form>
 			<div class="input__container">
-				<input required type="text" placeholder="Username" />
-				<input required type="text" placeholder="Password" />
+				<label for="username">Username</label>
+				<input required type="text" placeholder="Username" name="username" />
+
+				<label for="username">Password</label>
+				<input required type="text" placeholder="Password" name="password" />
 				<button @click="login" class="button_signup-login button--green">
-					Login
+					Log In
 				</button>
 			</div>
 		</form>

@@ -1,24 +1,28 @@
 <template>
 	<div>
-		<h1>🎮</h1>
-		<h1>Create Account</h1>
-		<h3>Please enter you details</h3>
+		<h2>🔑</h2>
+		<h1>Sign Up</h1>
+
 		<form @submit.prevent="submitUserDetails(accountDetails)">
 			<div class="input__container">
+				<label for="username">Username</label>
 				<input
 					required
 					type="text"
 					placeholder="Username"
 					v-model="accountDetails.username"
+					name="username"
 				/>
+				<label for="username">Password</label>
 				<input
 					required
 					type="password"
 					placeholder="Password"
 					v-model="accountDetails.password"
+					name="password"
 				/>
 				<button type="submit" class="button_signup-login button--green">
-					Create account
+					Create Account
 				</button>
 			</div>
 		</form>
@@ -47,6 +51,11 @@ export default {
 </script>
 
 <style>
+label {
+	padding: 10px 0;
+	text-align: left;
+	font-weight: bold;
+}
 input {
 	height: 35px;
 	border: 2px solid rgb(238, 237, 237);
@@ -58,16 +67,27 @@ input {
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
-	width: 220px;
+	width: 10rem;
 }
 
 .button_signup-login {
 	border: none;
 	margin-top: 20px;
-	height: 35px;
+	height: 70px;
+	font-size: 20px;
 }
 
 .button--green {
 	background-color: green;
+}
+
+@media screen and (min-width: 1050px) {
+	.input__container {
+		width: 15rem;
+	}
+
+	.button_signup-login {
+		height: 35px;
+	}
 }
 </style>

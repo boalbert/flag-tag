@@ -2,20 +2,30 @@
 	<section>
 		<Header />
 
-		<div v-if="accountExists">
-			<LoginForm />
-		</div>
-		<div v-else>
-			<SignUpForm @register-account="postNewAccount" />
-		</div>
+		<div class="form-container">
+			<div v-if="accountExists">
+				<LoginForm />
+			</div>
+			<div v-else>
+				<SignUpForm @register-account="postNewAccount" />
+			</div>
 
-		<p @click="accountExists = true" v-if="!accountExists">
-			I already have an account.
-		</p>
+			<p
+				@click="accountExists = true"
+				v-if="!accountExists"
+				class="text--underline"
+			>
+				I already have an account.
+			</p>
 
-		<p @click="accountExists = false" v-if="accountExists">
-			Oops! I need to create an account.
-		</p>
+			<p
+				@click="accountExists = false"
+				v-if="accountExists"
+				class="text--underline"
+			>
+				Oops! I need to create an account.
+			</p>
+		</div>
 	</section>
 </template>
 
@@ -66,4 +76,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.form-container {
+	margin: 0 auto;
+	/* border: 2px solid lightgray; */
+	border: 1px solid rgb(243, 243, 243);
+	padding: 40px 80px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.text--underline {
+	text-decoration: underline;
+}
+</style>
