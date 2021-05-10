@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<main>
 		<div class="form-container">
 			<div v-if="accountExists">
 				<LoginForm @login-account="loginAccount" />
@@ -26,7 +26,7 @@
 
 			<p v-if="loggedInUser">Logged in as: {{ loggedInUser }}</p>
 		</div>
-	</section>
+	</main>
 </template>
 
 <script>
@@ -117,8 +117,8 @@ export default {
 }
 </script>
 
-<style scoped>
-section {
+<style>
+main {
 	display: flex;
 	flex-direction: column;
 	width: 95%;

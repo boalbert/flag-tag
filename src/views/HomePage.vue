@@ -60,6 +60,10 @@ button {
 	border-radius: 5px;
 }
 
+button:hover {
+	cursor: pointer;
+}
+
 .button__gameOptions {
 	background-color: #007bff;
 	text-transform: uppercase;

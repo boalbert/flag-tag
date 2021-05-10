@@ -4,7 +4,6 @@
 		<h1>Sign Up</h1>
 
 		<div v-if="errors.length">
-			<h3 class="error-text error-text--heading">Please correct below:</h3>
 			<ul v-for="error in errors" :key="error.param">
 				<li class="error-text listItem--error">
 					{{ error.msg }}
