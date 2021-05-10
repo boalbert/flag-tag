@@ -3,6 +3,15 @@
 		<h2>🔑</h2>
 		<h1>Sign Up</h1>
 
+		<div v-if="errors.length">
+			<h3 class="error-text error-text--heading">Please correct below:</h3>
+			<ul v-for="error in errors" :key="error.param">
+				<li class="error-text listItem--error">
+					{{ error.param }}
+				</li>
+			</ul>
+		</div>
+
 		<form @submit.prevent="submitUserDetails(accountDetails)">
 			<div class="input__container">
 				<label for="username">Username</label>
@@ -10,7 +19,7 @@
 					required
 					type="text"
 					placeholder="Username"
-					v-model="accountDetails.username"
+					v-model.trim="accountDetails.username"
 					name="username"
 				/>
 				<label for="username">Password</label>
@@ -18,7 +27,7 @@
 					required
 					type="password"
 					placeholder="Password"
-					v-model="accountDetails.password"
+					v-model.trim="accountDetails.password"
 					name="password"
 				/>
 				<button type="submit" class="button_signup-login button--green">
@@ -32,6 +41,7 @@
 <script>
 export default {
 	name: 'SignUpForm',
+	props: ['errors'],
 	data() {
 		return {
 			accountDetails: {
@@ -45,6 +55,7 @@ export default {
 			this.$emit('register-account', accountDetails)
 			this.accountDetails.username = ''
 			this.accountDetails.passWord = ''
+			this.errors = ''
 		},
 	},
 }

@@ -10,16 +10,16 @@
 					type="text"
 					placeholder="Username"
 					name="username"
-					v-model="loginDetails.username"
+					v-model.trim="loginDetails.username"
 				/>
 
 				<label for="username">Password</label>
 				<input
 					required
-					type="text"
+					type="password"
 					placeholder="Password"
 					name="password"
-					v-model="loginDetails.password"
+					v-model.trim="loginDetails.password"
 				/>
 				<button type="submit" class="button_signup-login button--green">
 					Log In

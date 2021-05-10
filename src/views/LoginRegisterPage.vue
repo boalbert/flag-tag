@@ -1,46 +1,42 @@
 <template>
 	<section>
-		<Header />
-
 		<div class="form-container">
 			<div v-if="accountExists">
 				<LoginForm @login-account="loginAccount" />
 			</div>
 			<div v-else>
-				<SignUpForm @register-account="postNewAccount" />
+				<SignUpForm @register-account="postNewAccount" :errors="errors" />
 			</div>
 
 			<p
 				@click="accountExists = true"
 				v-if="!accountExists"
-				class="text--underline"
+				class="text--underline text__smallLoginText"
 			>
-				I already have an account.
+				Log in to my existing account.
 			</p>
 
 			<p
 				@click="accountExists = false"
 				v-if="accountExists"
-				class="text--underline"
+				class="text--underline text__smallLoginText"
 			>
 				Oops! I need to create an account.
 			</p>
 
-			<p v-if="accountExists">Logged in as: {{ loggedInUser }}</p>
+			<p v-if="loggedInUser">Logged in as: {{ loggedInUser }}</p>
 		</div>
 	</section>
 </template>
 
 <script>
 // @ is an alias to /src
-import Header from '@/components/Header.vue'
 import SignUpForm from '@/components/SignUpForm.vue'
 import LoginForm from '@/components/LoginForm.vue'
 
 export default {
 	name: 'Home',
 	components: {
-		Header,
 		SignUpForm,
 		LoginForm,
 	},
@@ -48,10 +44,14 @@ export default {
 		return {
 			accountExists: false,
 			loggedInUser: '',
+			errors: {},
 		}
 	},
 	methods: {
-		// Ej testad mot backend
+		getLoggedInUser() {
+			this.loggedInUser
+		},
+
 		postNewAccount(accountDetails) {
 			console.log('Emitted username: ' + accountDetails.username)
 			console.log('Emitted password: ' + accountDetails.password)
@@ -66,25 +66,25 @@ export default {
 				headers: {
 					'Content-type': 'application/json',
 				},
-
 				body: JSON.stringify(credentials),
 			})
-				.then((res) => {
-					// Lägg till metod / hantering av svar från server
-					console.log(res)
-					if (res.status === 400) {
-						// TODO Lägg till felmeddelande Array
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data)
+					// Lyckades ej skapa konto
+					// Lägg in felmeddelane i en array[], loopa igenom och fyll på
+					if (!data.success) {
+						this.errors = data.errors
 						console.log('Failed to create account')
-
+						console.log(data.errors)
+						console.log(data.errors.length)
+						console.log(data.errors[0].param)
+						if (data.errors.length > 1) console.log(data.errors[1].param)
 						// Lägg till hantering när konto är skapat
-					} else if (res.status === 200) {
+						// Redirect till startsida?
+					} else if (data.success) {
 						console.log('Account created')
 					}
-				})
-				.catch((err) => {
-					// Lägg till felmeddelande i frontend
-					console.log('Inside catch')
-					console.log('Error message: ', err)
 				})
 		},
 		loginAccount(loginDetails) {
@@ -99,7 +99,14 @@ export default {
 				.then((response) => {
 					console.log(response.users.length)
 					if (response.users.length > 0) {
-						console.log('Login Successful!' + response.users[0].userName)
+						let userInfo = {
+							userId: response.users[0].userId,
+							userName: response.users[0].userName,
+						}
+
+						localStorage.setItem('userId', userInfo.userId)
+						localStorage.setItem('userName', userInfo.userName)
+
 						this.accountExists = true
 						this.loggedInUser = response.users[0].userName
 					}
@@ -110,7 +117,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+section {
+	display: flex;
+	flex-direction: column;
+	width: 95%;
+	margin: 0 auto;
+	max-width: 1400px;
+}
+
 .form-container {
 	margin: 0 auto;
 	border: 1px solid rgb(243, 243, 243);
@@ -120,5 +135,27 @@ export default {
 
 .text--underline {
 	text-decoration: underline;
+}
+
+.text__smallLoginText {
+	font-size: 14px;
+}
+
+.text--underline:hover {
+	cursor: pointer;
+}
+
+.error-text {
+	color: #b00020;
+}
+
+.error-text--heading {
+	font-size: 15px;
+}
+
+.listItem--error {
+	font-size: 14px;
+	padding: 0px;
+	text-align: center;
 }
 </style>
