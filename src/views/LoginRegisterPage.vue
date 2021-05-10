@@ -75,11 +75,11 @@ export default {
 					// Lägg in felmeddelane i en array[], loopa igenom och fyll på
 					if (!data.success) {
 						this.errors = data.errors
-						console.log('Failed to create account')
-						console.log(data.errors)
-						console.log(data.errors.length)
-						console.log(data.errors[0].param)
-						if (data.errors.length > 1) console.log(data.errors[1].param)
+						console.log('Failed to create account: ')
+						data.errors.forEach((element) => {
+							console.log(' > Error in: ' + element.param + ' - ' + element.msg)
+						})
+
 						// Lägg till hantering när konto är skapat
 						// Redirect till startsida?
 					} else if (data.success) {

@@ -7,7 +7,7 @@
 			<h3 class="error-text error-text--heading">Please correct below:</h3>
 			<ul v-for="error in errors" :key="error.param">
 				<li class="error-text listItem--error">
-					{{ error.param }}
+					{{ error.msg }}
 				</li>
 			</ul>
 		</div>
