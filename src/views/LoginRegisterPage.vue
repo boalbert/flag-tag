@@ -24,7 +24,8 @@
 				Oops! I need to create an account.
 			</p>
 
-			<p v-if="loggedInUser">Logged in as: {{ loggedInUser }}</p>
+			<!-- Temporary, move this printout -->
+			<p v-if="this.users.length > 0">Logged in as: {{ users[0].userName }}</p>
 		</div>
 	</main>
 </template>
@@ -43,15 +44,11 @@ export default {
 	data() {
 		return {
 			accountExists: false,
-			loggedInUser: '',
 			errors: {},
+			users: [],
 		}
 	},
 	methods: {
-		getLoggedInUser() {
-			this.loggedInUser
-		},
-
 		postNewAccount(accountDetails) {
 			console.log('Emitted username: ' + accountDetails.username)
 			console.log('Emitted password: ' + accountDetails.password)
@@ -70,9 +67,6 @@ export default {
 			})
 				.then((response) => response.json())
 				.then((data) => {
-					console.log(data)
-					// Lyckades ej skapa konto
-					// Lägg in felmeddelane i en array[], loopa igenom och fyll på
 					if (!data.success) {
 						this.errors = data.errors
 						console.log('Failed to create account: ')
@@ -91,24 +85,19 @@ export default {
 			const username = loginDetails.username
 			const password = loginDetails.password
 
-			console.log('Username: ' + username)
-			console.log('Password: ' + password)
+			console.log('Trying to log in with below details: ')
+			console.log('> Username: ' + username)
+			console.log('> Password: ' + password)
 
 			fetch(`http://localhost:3000/users/${username}/${password}`)
 				.then((response) => response.json())
-				.then((response) => {
-					console.log(response.users.length)
-					if (response.users.length > 0) {
-						let userInfo = {
-							userId: response.users[0].userId,
-							userName: response.users[0].userName,
-						}
+				.then((data) => {
+					if (data.users.length > 0) {
+						console.log('Login Success')
+						this.users = data.users
 
-						localStorage.setItem('userId', userInfo.userId)
-						localStorage.setItem('userName', userInfo.userName)
-
-						this.accountExists = true
-						this.loggedInUser = response.users[0].userName
+						localStorage.setItem('userId', data.users[0].userId)
+						localStorage.setItem('userName', data.users[0].userName)
 					}
 				})
 		},
