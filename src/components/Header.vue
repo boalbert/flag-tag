@@ -4,8 +4,7 @@
 			<h2>💡</h2>
 		</div>
 		<div>
-			<h1>FlagTag 🚩</h1>
-		</div>
+            <img src="../img/logga.png" height="255" width="255" alt=""/></div>
 		<div>
 			<!-- Dölj om man ej är inloggad  -->
 			<!-- Alternativt visa Log in / Sign up om man ej är inloggad -->
