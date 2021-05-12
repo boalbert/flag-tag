@@ -4,7 +4,7 @@
 			<h2>💡</h2>
 		</div>
 		<div>
-            <img src="../img/logga.png" height="255" width="255" alt=""/></div>
+            <img src="../img/logga.png" height="255" width="255" alt="logo"/></div>
 		<div>
 			<!-- Dölj om man ej är inloggad  -->
 			<!-- Alternativt visa Log in / Sign up om man ej är inloggad -->
