@@ -10,16 +10,13 @@ import SelectGameMode from '@/components/SelectGameMode.vue'
 import ListHighScore from '@/components/ListHighScore.vue'
 
 export default {
-	name: 'Home',
+	name: 'HomePage',
 	components: {
 		SelectGameMode,
 		ListHighScore,
 	},
 	data() {
-		return {
-			userDetails: '',
-			signedIn: false,
-		}
+		return {}
 	},
 }
 </script>

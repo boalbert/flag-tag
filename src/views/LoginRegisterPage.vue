@@ -1,14 +1,5 @@
 <template>
 	<main>
-		<div v-if="redirectToHomePage" class="redirectDialog">
-			<p>
-				Logged in as
-				<b
-					><span> {{ users.username }} </span></b
-				>.
-			</p>
-			<p>Go back to home and try a challenge!</p>
-		</div>
 		<div class="form-container">
 			<div v-if="accountExists">
 				<LoginForm @login-account="loginAccount" :errors="errors" />
@@ -32,19 +23,17 @@
 			>
 				Oops! I need to create an account.
 			</p>
-
-			<!-- Temporary, move this printout -->
-			<p v-if="this.users.length > 0">Logged in as: {{ users[0].userName }}</p>
 		</div>
 	</main>
 </template>
 
 <script>
+import { bus } from '../main'
 import SignUpForm from '@/components/SignUpForm.vue'
 import LoginForm from '@/components/LoginForm.vue'
 
 export default {
-	name: 'Home',
+	name: 'LoginRegisterPage',
 	components: {
 		SignUpForm,
 		LoginForm,
@@ -53,15 +42,12 @@ export default {
 		return {
 			accountExists: false,
 			errors: {},
-			users: [],
-			redirectToHomePage: false,
 		}
 	},
 	methods: {
 		showLoginOrSignupComponent() {
-			// Clear errors array when switching
+			// Clear errors array when switching between signup/login
 			this.errors = ''
-			this.loginErrors = ''
 			this.accountExists = !this.accountExists
 		},
 		postNewAccount(accountDetails) {
@@ -78,8 +64,12 @@ export default {
 						// Error message is sent to SignUpForm component as array and displayed there
 						this.errors = data.errors
 					} else if (data.success) {
-						this.redirectToHomePage = true
-						this.users = data.users
+						this.saveUserDetailsLocalStorage(
+							data.users.userId,
+							data.users.username
+						)
+
+						this.$router.push('/')
 					}
 				})
 		},
@@ -90,12 +80,15 @@ export default {
 			)
 				.then((response) => response.json())
 				.then((data) => {
+					// Login success
+					// Save userdetails to localstorage
+					// Redirect to homepage
+					// Send loginstatus true via eventbus
 					if (data.users.length > 0) {
-						// Login successfull
-						this.users = data.users
-						localStorage.setItem('userId', data.users[0].userId)
-						localStorage.setItem('userName', data.users[0].userName)
-						// Redirect to homepage
+						this.saveUserDetailsLocalStorage(
+							data.users[0].userId,
+							data.users[0].userName
+						)
 						this.$router.push('/')
 					} else {
 						// Login failed
@@ -104,6 +97,12 @@ export default {
 							'Failed to login. Please check username and/or password.'
 					}
 				})
+		},
+
+		saveUserDetailsLocalStorage(userId, userName) {
+			localStorage.setItem('userId', userId)
+			localStorage.setItem('userName', userName)
+			bus.$emit('login-status', true)
 		},
 	},
 }
@@ -123,15 +122,6 @@ main {
 	border: 1px solid rgb(243, 243, 243);
 	padding: 40px 80px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-}
-
-.redirectDialog {
-	background: white;
-	border: 1px solid rgb(243, 243, 243);
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-	width: 500px;
-	margin: 0 auto;
-	border-radius: 5px;
 }
 
 .button_signup-login {

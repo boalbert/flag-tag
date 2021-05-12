@@ -3,6 +3,7 @@
 		<h2>🔑</h2>
 		<h1>Sign Up</h1>
 
+		<!-- Display errors when signing up, validated in backend -->
 		<div v-if="errors.length">
 			<ul v-for="error in errors" :key="error.param">
 				<li class="error-text listItem--error">
@@ -11,6 +12,7 @@
 			</ul>
 		</div>
 
+		<!-- Emits input to parent component which uses details to check with backend-->
 		<form @submit.prevent="submitUserDetails(accountDetails)">
 			<div class="input__container">
 				<label for="username">Username</label>
@@ -53,8 +55,7 @@ export default {
 		submitUserDetails(accountDetails) {
 			this.$emit('register-account', accountDetails)
 			this.accountDetails.username = ''
-			this.accountDetails.passWord = ''
-			this.errors = []
+			this.accountDetails.password = ''
 		},
 	},
 }
@@ -79,8 +80,6 @@ input {
 	margin: 0 auto;
 	width: 10rem;
 }
-
-
 
 @media screen and (min-width: 1050px) {
 	.input__container {

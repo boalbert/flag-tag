@@ -19,29 +19,21 @@
 </template>
 
 <script>
+import { bus } from '../main'
+
 export default {
 	name: 'Header',
 	data() {
 		return {
-			signedIn: '',
+			signedIn: false,
 		}
 	},
-	methods: {
-		checkLoginStatus() {
-			if (localStorage.getItem('userId') && localStorage.getItem('userName')) {
-				this.userDetails = {
-					userId: localStorage.getItem('userId'),
-					userName: localStorage.getItem('userName'),
-				}
-				this.signedIn = true
-			} else {
-				console.log('Not logged in')
-				this.signedIn = false
-			}
-		},
-	},
 	created() {
-		this.checkLoginStatus()
+		// Listen for login-status emitted by sign out / sign in functions.
+		// Used for displaying profile link or register link
+		bus.$on('login-status', (data) => {
+			this.signedIn = data
+		})
 	},
 }
 </script>
