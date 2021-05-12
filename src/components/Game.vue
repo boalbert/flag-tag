@@ -1,9 +1,25 @@
 <template>
-    <div>
-        <p>Here is the game gonna be</p>
+    <div class="game-container">
+        <div class="quiz">
+          <div class="header">
+            <button v-on:click="addAllCountriesToList">Start</button>
+            <h1>Quiz</h1>
+          </div>
+          <div class="main">
+            <div class="box-flag">
+
+            </div>
+            <div class="box-suggestion">
+              <ul>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+        </div>
     </div>
 </template>
 <script>
+console.log('Game Value')
 export default {
     name: 'Game',
     methods:{
@@ -31,7 +47,27 @@ export default {
                 });
             });
         },
-    }
+      async addAllCountriesToList(){
+          this.countryList = await this.getAllCountries();
+
+      }
+    },
+  data(){
+      return{
+        countryList:[],
+        questions:[
+          {
+            question:'Question',
+            suggestions: [
+              {suggestion:'Answer 1'},
+              {suggestion:'Answer 2'},
+              {suggestion:'Answer 3'},
+              {suggestion:'Answer 4'},
+            ]
+          },
+        ]
+      }
+  }
 }
 </script>
 <style scoped>

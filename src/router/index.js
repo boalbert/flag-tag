@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
+import GamePage from '../views/GamePage.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,12 @@ const routes = [
 		name: 'ProfilePage',
 		component: () =>
 			import(/* webpackChunkName: "about" */ '../views/ProfilePage.vue'),
+	},
+	{
+		path: '/gamepage',
+		name: 'GamePage',
+		component:
+			GamePage,
 	},
 ]
 
