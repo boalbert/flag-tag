@@ -54,7 +54,7 @@ export default {
 			this.$emit('register-account', accountDetails)
 			this.accountDetails.username = ''
 			this.accountDetails.passWord = ''
-			this.errors = ''
+			this.errors = []
 		},
 	},
 }
@@ -80,24 +80,11 @@ input {
 	width: 10rem;
 }
 
-.button_signup-login {
-	border: none;
-	margin-top: 20px;
-	height: 70px;
-	font-size: 20px;
-}
 
-.button--green {
-	background-color: green;
-}
 
 @media screen and (min-width: 1050px) {
 	.input__container {
 		width: 15rem;
-	}
-
-	.button_signup-login {
-		height: 35px;
 	}
 }
 </style>

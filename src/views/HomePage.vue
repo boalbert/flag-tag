@@ -18,22 +18,8 @@ export default {
 	data() {
 		return {
 			userDetails: '',
+			signedIn: false,
 		}
-	},
-	methods: {
-		checkLoginStatus() {
-			let userDetails = {
-				userId: localStorage.getItem('userId'),
-				userName: localStorage.getItem('userName'),
-			}
-
-			this.userDetails = userDetails
-		},
-	},
-	mounted: {
-		checkLoginStatus() {
-			this.checkLoginStatus
-		},
 	},
 }
 </script>
@@ -55,11 +41,6 @@ section {
 	}
 }
 
-button {
-	color: white;
-	border-radius: 5px;
-}
-
 button:hover {
 	cursor: pointer;
 }
@@ -72,6 +53,8 @@ button:hover {
 	height: 100px;
 	border: 0;
 	margin: 25px 0 25px 0;
+	color: white;
+	border-radius: 5px;
 }
 
 .button__darkMode {

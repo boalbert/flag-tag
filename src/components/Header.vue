@@ -7,11 +7,13 @@
 			<h1>FlagTag 🚩</h1>
 		</div>
 		<div>
-			<!-- Dölj om man ej är inloggad  -->
-			<!-- Alternativt visa Log in / Sign up om man ej är inloggad -->
-			<router-link to="/">Home</router-link>
-			<router-link to="/profile" v-if="signedIn">| 👱🏻‍♀️ Profile</router-link>
-			<router-link to="/register" v-else>| 🚪 Sign up / Sign in</router-link>
+			<router-link to="/" class="router-links">Home</router-link>
+			<router-link to="/profile" v-if="signedIn" class="router-links"
+				>👱🏻‍♀️ Profile</router-link
+			>
+			<router-link to="/register" v-else class="router-links">
+				Sign up / Sign in</router-link
+			>
 		</div>
 	</header>
 </template>
@@ -19,8 +21,27 @@
 <script>
 export default {
 	name: 'Header',
-	props: {
-		signedIn: Boolean,
+	data() {
+		return {
+			signedIn: '',
+		}
+	},
+	methods: {
+		checkLoginStatus() {
+			if (localStorage.getItem('userId') && localStorage.getItem('userName')) {
+				this.userDetails = {
+					userId: localStorage.getItem('userId'),
+					userName: localStorage.getItem('userName'),
+				}
+				this.signedIn = true
+			} else {
+				console.log('Not logged in')
+				this.signedIn = false
+			}
+		},
+	},
+	created() {
+		this.checkLoginStatus()
 	},
 }
 </script>
@@ -33,5 +54,14 @@ header {
 	border-bottom: 2px solid lightgray;
 	margin-bottom: 50px;
 	background-color: rgb(247, 247, 247);
+}
+
+.router-links {
+	text-decoration: underline;
+	font-family: Helvetica, sans-serif;
+	font-size: 18px;
+	color: black;
+	font-weight: bold;
+	padding: 20px;
 }
 </style>

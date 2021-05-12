@@ -2,6 +2,15 @@
 	<div>
 		<h2>🔐</h2>
 		<h1>Sign In</h1>
+
+		<div v-if="errors.length > 0">
+			<ul>
+				<li class="error-text listItem--error">
+					{{ errors }}
+				</li>
+			</ul>
+		</div>
+
 		<form @submit.prevent="submitLoginDetails(loginDetails)">
 			<div class="input__container">
 				<label for="username">Username</label>
@@ -32,6 +41,7 @@
 <script>
 export default {
 	name: 'LoginForm',
+	props: ['errors'],
 	data() {
 		return {
 			loginDetails: {
