@@ -2,14 +2,14 @@
 	<main>
 		<div class="form-container">
 			<div v-if="accountExists">
-				<LoginForm @login-account="loginAccount" />
+				<LoginForm @login-account="loginAccount" :errors="errors" />
 			</div>
 			<div v-else>
 				<SignUpForm @register-account="postNewAccount" :errors="errors" />
 			</div>
 
 			<p
-				@click="accountExists = true"
+				@click="showLoginOrSignupComponent"
 				v-if="!accountExists"
 				class="text--underline text__smallLoginText"
 			>
@@ -17,26 +17,23 @@
 			</p>
 
 			<p
-				@click="accountExists = false"
+				@click="showLoginOrSignupComponent"
 				v-if="accountExists"
 				class="text--underline text__smallLoginText"
 			>
 				Oops! I need to create an account.
 			</p>
-
-			<!-- Temporary, move this printout -->
-			<p v-if="this.users.length > 0">Logged in as: {{ users[0].userName }}</p>
 		</div>
 	</main>
 </template>
 
 <script>
-// @ is an alias to /src
+import { bus } from '../main'
 import SignUpForm from '@/components/SignUpForm.vue'
 import LoginForm from '@/components/LoginForm.vue'
 
 export default {
-	name: 'Home',
+	name: 'LoginRegisterPage',
 	components: {
 		SignUpForm,
 		LoginForm,
@@ -45,64 +42,69 @@ export default {
 		return {
 			accountExists: false,
 			errors: {},
-			users: [],
 		}
 	},
 	methods: {
+		showLoginOrSignupComponent() {
+			// Clear errors array when switching between signup/login
+			this.errors = ''
+			this.accountExists = !this.accountExists
+		},
 		postNewAccount(accountDetails) {
-			console.log('Emitted username: ' + accountDetails.username)
-			console.log('Emitted password: ' + accountDetails.password)
-
-			let credentials = {
-				username: accountDetails.username,
-				password: accountDetails.password,
-			}
-
 			fetch('http://localhost:3000/users', {
 				method: 'POST',
 				headers: {
 					'Content-type': 'application/json',
 				},
-				body: JSON.stringify(credentials),
+				body: JSON.stringify(accountDetails),
 			})
 				.then((response) => response.json())
 				.then((data) => {
 					if (!data.success) {
+						// Error message is sent to SignUpForm component as array and displayed there
 						this.errors = data.errors
-						console.log('Failed to create account: ')
-						data.errors.forEach((element) => {
-							console.log(' > Error in: ' + element.param + ' - ' + element.msg)
-						})
-
-						// Lägg till hantering när konto är skapat
-						// Redirect till startsida?
 					} else if (data.success) {
-						console.log('Account created')
+						this.saveUserDetailsLocalStorage(
+							data.users.userId,
+							data.users.username
+						)
+
+						this.$router.push('/')
 					}
 				})
 		},
+
 		loginAccount(loginDetails) {
-			const username = loginDetails.username
-			const password = loginDetails.password
-
-			console.log('Trying to log in with below details: ')
-			console.log('> Username: ' + username)
-			console.log('> Password: ' + password)
-
-			fetch(`http://localhost:3000/users/${username}/${password}`)
+			fetch(
+				`http://localhost:3000/users/${loginDetails.username}/${loginDetails.password}`
+			)
 				.then((response) => response.json())
 				.then((data) => {
+					// Login success
+					// Save userdetails to localstorage
+					// Redirect to homepage
+					// Send loginstatus true via eventbus
 					if (data.users.length > 0) {
-						console.log('Login Success')
-						this.users = data.users
-
-						localStorage.setItem('userId', data.users[0].userId)
-						localStorage.setItem('userName', data.users[0].userName)
+						this.saveUserDetailsLocalStorage(
+							data.users[0].userId,
+							data.users[0].userName
+						)
+						this.$router.push('/')
+					} else {
+						// Login failed
+						// Error message is sent to SignUpForm component as array and displayed there
+						this.errors =
+							'Failed to login. Please check username and/or password.'
 					}
 				})
 		},
+
+		saveUserDetailsLocalStorage(userId, userName) {
+			localStorage.setItem('userId', userId)
+			localStorage.setItem('userName', userName)
+			bus.$emit('login-status', true)
+		},
 	},
-	mounted() {},
 }
 </script>
 
@@ -111,7 +113,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	width: 95%;
-	margin: 0 auto;
+	margin: 15px auto;
 	max-width: 1400px;
 }
 
@@ -120,6 +122,24 @@ main {
 	border: 1px solid rgb(243, 243, 243);
 	padding: 40px 80px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.button_signup-login {
+	color: white;
+	border: none;
+	margin-top: 20px;
+	height: 70px;
+	font-size: 20px;
+}
+
+@media screen and (min-width: 1050px) {
+	.button_signup-login {
+		height: 35px;
+	}
+}
+
+.button--green {
+	background-color: green;
 }
 
 .text--underline {
@@ -145,6 +165,5 @@ main {
 .listItem--error {
 	font-size: 14px;
 	padding: 0px;
-	text-align: center;
 }
 </style>
