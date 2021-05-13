@@ -1,9 +1,26 @@
 <template>
-    <div>
-        <p>Here is the game gonna be</p>
+    <div class="game-container">
+        <div class="quiz">
+          <div class="header">
+            <button v-on:click="displayQuestion">Start</button>
+            <h1>Quiz</h1>
+          </div>
+          <div class="main">
+            <div class="box-flag">
+                <img v-bind:src="this.countryFlag"/>
+            </div>
+            <div class="box-suggestion">
+              <ul>
+                <li v-for="(alternative,index) in alternatives" v-bind:key="index">{{alternative}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
     </div>
 </template>
 <script>
+import _ from 'lodash'
+console.log('Game Value')
 export default {
     name: 'Game',
     methods:{
@@ -31,7 +48,50 @@ export default {
                 });
             });
         },
-    }
+      async createQuestion(){
+          if (this.countryListOriginal.length < 1) {
+            this.countryListOriginal = await this.getAllCountries();
+            this.countryListSplice = this.countryListOriginal
+          }
+          let index = Math.floor((Math.random() * this.countryListSplice.length))
+
+          return this.countryListSplice[index]
+      },
+      async displayQuestion(){
+          let country = await this.createQuestion()
+          this.countryName = country.name
+          this.countryFlag = country.flag
+            this.alternatives.push(country.name)
+          while (this.alternatives.length != 4){
+            let index = Math.floor((Math.random() * this.countryListOriginal.length))
+            if(!this.alternatives.includes(this.countryListOriginal[index].name)){
+              this.alternatives.push(this.countryListOriginal[index].name)
+            }
+          }
+        (this.alternatives)= _.shuffle(this.alternatives)
+
+      }
+    },
+  data(){
+      return{
+        countryListOriginal:[],
+        countryListSplice: [],
+        countryName: "",
+        countryFlag: "",
+        alternatives:[],
+        questions:[
+          {
+            question:'Question',
+            suggestions: [
+              {suggestion:'Answer 1'},
+              {suggestion:'Answer 2'},
+              {suggestion:'Answer 3'},
+              {suggestion:'Answer 4'},
+            ]
+          },
+        ]
+      }
+  }
 }
 </script>
 <style scoped>
