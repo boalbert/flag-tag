@@ -2,6 +2,16 @@
 	<div>
 		<h2>🔐</h2>
 		<h1>Sign In</h1>
+
+		<!-- Display errors in login-details -->
+		<div v-if="errors.length > 0">
+			<ul>
+				<li class="error-text listItem--error">
+					{{ errors }}
+				</li>
+			</ul>
+		</div>
+		<!-- Emits input to parent component which uses details to check with backend-->
 		<form @submit.prevent="submitLoginDetails(loginDetails)">
 			<div class="input__container">
 				<label for="username">Username</label>
@@ -32,6 +42,7 @@
 <script>
 export default {
 	name: 'LoginForm',
+	props: ['errors'],
 	data() {
 		return {
 			loginDetails: {
@@ -42,6 +53,7 @@ export default {
 	},
 	methods: {
 		submitLoginDetails(loginDetails) {
+			// Emit loginDetails to parent to validate
 			this.$emit('login-account', loginDetails)
 			this.loginDetails.username = ''
 			this.loginDetails.password = ''
