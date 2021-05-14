@@ -29,7 +29,7 @@
 					v-model.trim="accountDetails.password"
 					name="password"
 				/>
-				<button type="submit" class="button_signup-login button--green">
+				<button type="submit" class="button_signup-login button--blue">
 					Create Account
 				</button>
 			</div>
@@ -61,10 +61,16 @@ export default {
 </script>
 
 <style>
+    h1{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 30px;
+        color: #f7931e;
+    }
 label {
 	padding: 10px 0;
 	text-align: left;
 	font-weight: bold;
+    font-family: Arial, sans-serif;
 }
 input {
 	height: 35px;
@@ -85,10 +91,11 @@ input {
 	margin-top: 20px;
 	height: 70px;
 	font-size: 20px;
+    color: #f7931e;
 }
 
-.button--green {
-	background-color: green;
+.button--blue {
+	background-color: #3333ff;
 }
 
 @media screen and (min-width: 1050px) {

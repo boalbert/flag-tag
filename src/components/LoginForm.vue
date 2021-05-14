@@ -21,7 +21,7 @@
 					name="password"
 					v-model.trim="loginDetails.password"
 				/>
-				<button type="submit" class="button_signup-login button--green">
+				<button type="submit" class="button_signup-login button--blue">
 					Log In
 				</button>
 			</div>
@@ -50,4 +50,15 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+    h1{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 30px;
+        color: #f7931e;
+    }
+button{
+    font-family: Arial, sans-serif;
+    color: #f7931e;
+}
+
+</style>

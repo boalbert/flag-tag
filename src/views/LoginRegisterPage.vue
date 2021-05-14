@@ -108,6 +108,7 @@ export default {
 
 <style>
 main {
+
 	display: flex;
 	flex-direction: column;
 	width: 95%;
@@ -116,7 +117,7 @@ main {
 }
 
 .form-container {
-	margin: 0 auto;
+    margin: 0 auto;
 	border: 1px solid rgb(243, 243, 243);
 	padding: 40px 80px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -132,6 +133,11 @@ main {
 
 .text--underline:hover {
 	cursor: pointer;
+}
+p{
+    font-family: Arial, sans-serif;
+    color: #3333ff;
+
 }
 
 .error-text {

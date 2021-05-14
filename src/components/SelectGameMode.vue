@@ -15,4 +15,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+    .button__gameOptions{
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        color: #f7931e;
+        background-color: #3333ff;
+    }
+
+</style>
