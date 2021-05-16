@@ -95,5 +95,15 @@ export default {
 }
 </script>
 <style scoped>
-
+    h1 {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 30px;
+        color: #f7931e;
+    }
+    button {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #f7931e;
+        background-color: #3333ff;
+    }
 </style>

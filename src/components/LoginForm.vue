@@ -62,4 +62,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+    h1{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 30px;
+        color: #f7931e;
+    }
+    .button_signup-login {
+        font-family: Arial, sans-serif;
+        color: #3333ff;
+    }
+</style>

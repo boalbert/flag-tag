@@ -26,4 +26,18 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+    h2{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 30px;
+        color: #f7931e;
+        text-align: center;
+    }
+    li{
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: #3333ff;
+        text-align: center;
+    }
+
+</style>

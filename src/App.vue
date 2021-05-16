@@ -24,7 +24,7 @@ p {
 }
 
 h1 {
-	font-family: 'Arvo', Georgia, serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1 {
@@ -45,6 +45,6 @@ p {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: #2c3e50;
+	color: #3333ff;
 }
 </style>
