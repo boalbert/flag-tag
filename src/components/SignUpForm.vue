@@ -62,6 +62,11 @@ export default {
 </script>
 
 <style>
+    h1 {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 30px;
+        color: #f7931e;
+    }
 label {
 	padding: 10px 0;
 	text-align: left;
@@ -80,6 +85,12 @@ input {
 	margin: 0 auto;
 	width: 10rem;
 }
+
+.button--green{
+        font-family: Arial, sans-serif;
+        text-decoration-color: #3333ff;
+    }
+
 
 @media screen and (min-width: 1050px) {
 	.input__container {

@@ -4,7 +4,7 @@
 			<h2>💡</h2>
 		</div>
 		<div>
-			<h1>FlagTag 🚩</h1>
+			<img src="../img/logga.png" height="255" width="255"/>
 		</div>
 		<div>
 			<router-link to="/" class="router-links">Home</router-link>

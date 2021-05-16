@@ -125,8 +125,9 @@ main {
 }
 
 .button_signup-login {
-	color: white;
-	border: none;
+	color: #f7931e;
+    border-radius: 5px;
+    border: 1px solid rgb(243, 243, 243);
 	margin-top: 20px;
 	height: 70px;
 	font-size: 20px;
@@ -138,8 +139,9 @@ main {
 	}
 }
 
-.button--green {
-	background-color: green;
+button {
+	background-color: #3333ff;
+
 }
 
 .text--underline {
@@ -152,6 +154,10 @@ main {
 
 .text--underline:hover {
 	cursor: pointer;
+}
+p {
+    font-family: Arial, sans-serif;
+    color: #3333ff;
 }
 
 .error-text {
