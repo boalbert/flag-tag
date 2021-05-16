@@ -4,8 +4,8 @@
 			<h2>💡</h2>
 		</div>
 		<div>
-			<img src="../img/logga.png" height="255" width="255"/>
-		</div>
+    <img src="../img/logga.png" height="255" width="255" alt="logo"/></div>
+
 		<div>
 			<router-link to="/" class="router-links">Home</router-link>
 			<router-link to="/profile" v-if="signedIn" class="router-links"
