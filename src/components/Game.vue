@@ -4,21 +4,34 @@
 			Start
 		</button>
 		<div v-if="gameStarted" class="quiz">
-			<div class="header">
-				<h1>Question 1 / 20</h1>
+			<div v-if="!quitGame" class="header">
+				<h1>Question {{ questionCounter }}</h1>
+				<h3>Score: {{ score }}</h3>
 			</div>
-			<div class="main">
+			<div v-if="!quitGame" class="main">
 				<div class="box-flag">
 					<img class="img-flag" v-bind:src="this.countryFlag" />
 				</div>
 				<div class="box-suggestion">
 					<ul>
-						<li v-for="(alternative, index) in alternatives" v-bind:key="index">
+						<li
+							v-for="(alternative, index) in alternatives"
+							v-bind:key="index"
+							v-on:click="checkAnswer(alternative)"
+						>
 							{{ alternative }}
 						</li>
 					</ul>
 				</div>
-				<button @click="displayQuestion">Next</button>
+				<button v-on:click="quitGame = true">
+					Quit / Show score
+				</button>
+			</div>
+			<div v-if="quitGame" class="results">
+				<h2>Your score:</h2>
+				<p>Score: {{ score }}</p>
+				<p>Questions: {{ questionCounter }}</p>
+				<button v-on:click="resetRound">Play again?</button>
 			</div>
 		</div>
 	</div>
@@ -62,8 +75,18 @@ export default {
 
 			return this.countryListSplice[index]
 		},
-		async displayQuestion() {
+
+		resetRound() {
+			this.questionCounter = 0
 			this.gameStarted = true
+			this.score = 0
+			this.quitGame = false
+			this.displayQuestion()
+		},
+		async displayQuestion() {
+			this.questionCounter++
+			this.gameStarted = true
+			this.quitGame = false
 			this.alternatives = []
 			let country = await this.createQuestion()
 			this.countryName = country.name
@@ -77,6 +100,19 @@ export default {
 			}
 			this.alternatives = _.shuffle(this.alternatives)
 		},
+		checkAnswer(alternative) {
+			let selectedAnswer = alternative
+			console.log(selectedAnswer)
+
+			if (this.countryName === selectedAnswer) {
+				console.log(this.countryName)
+				console.log('Correct guess')
+				this.score++
+			} else {
+				console.log('Wrong answer')
+			}
+			setTimeout(this.displayQuestion, 1000)
+		},
 	},
 	data() {
 		return {
@@ -86,6 +122,9 @@ export default {
 			countryName: '',
 			countryFlag: '',
 			alternatives: [],
+			score: 0,
+			questionCounter: 0,
+			quitGame: false,
 			questions: [
 				{
 					question: 'Question',
@@ -123,7 +162,7 @@ button {
 	display: grid;
 	/* border: 2px solid red; */
 	width: 500px;
-	height: 600px;
+	height: 800px;
 	margin: 0 auto;
 
 	border: 1px solid rgb(243, 243, 243);
@@ -132,6 +171,9 @@ button {
 
 .header {
 	/* background-color: green; */
+}
+
+.results {
 }
 
 .main {
