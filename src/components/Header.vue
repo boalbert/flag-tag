@@ -1,10 +1,12 @@
 <template>
 	<header>
-		<div>
-			<h2>💡</h2>
+		<div class="container-logo">
+			<img class="logo-img" src="../img/logga.png" alt="logo" />
 		</div>
+
 		<div>
-    <img src="../img/logga.png" height="255" width="255" alt="logo"/></div>
+			<p>- “Use your swag to brag in FlagTag!”</p>
+		</div>
 
 		<div>
 			<router-link to="/" class="router-links">Home</router-link>
@@ -12,8 +14,9 @@
 				>👱🏻‍♀️ Profile</router-link
 			>
 			<router-link to="/register" v-else class="router-links">
-				Sign up / Sign in</router-link
+				Sign in</router-link
 			>
+			💡
 		</div>
 	</header>
 </template>
@@ -42,10 +45,26 @@ export default {
 header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	align-items: baseline;
+	height: 85px;
 	border-bottom: 2px solid lightgray;
 	margin-bottom: 50px;
-	background-color: rgb(247, 247, 247);
+	margin: 0 0 100px 0;
+	align-items: center;
+	/* background-color: rgb(247, 247, 247); */
+}
+
+header > div {
+	/* border: 2px solid red; */
+}
+
+.container-logo {
+	justify-self: left;
+	padding: 0 0 0 25px;
+}
+
+.logo-img {
+	width: 130px;
+	height: 100%;
 }
 
 .router-links {
