@@ -18,6 +18,7 @@
 							v-for="(alternative, index) in alternatives"
 							v-bind:key="index"
 							v-on:click="checkAnswer(alternative)"
+							:class="answerClass(alternative)"
 						>
 							{{ alternative }}
 						</li>
@@ -69,10 +70,11 @@ export default {
 		async createQuestion() {
 			if (this.countryListOriginal.length < 1) {
 				this.countryListOriginal = await this.getAllCountries()
-				this.countryListSplice = this.countryListOriginal
+				this.countryListSplice = [...this.countryListOriginal]
 			}
 			let index = Math.floor(Math.random() * this.countryListSplice.length)
 
+			this.correctIndexToSplice = this.countryListSplice[index]
 			return this.countryListSplice[index]
 		},
 
@@ -84,10 +86,12 @@ export default {
 			this.displayQuestion()
 		},
 		async displayQuestion() {
+			this.answered = false
 			this.questionCounter++
 			this.gameStarted = true
 			this.quitGame = false
 			this.alternatives = []
+
 			let country = await this.createQuestion()
 			this.countryName = country.name
 			this.countryFlag = country.flag
@@ -101,17 +105,29 @@ export default {
 			this.alternatives = _.shuffle(this.alternatives)
 		},
 		checkAnswer(alternative) {
+			this.answered = true
+
 			let selectedAnswer = alternative
 			console.log(selectedAnswer)
 
 			if (this.countryName === selectedAnswer) {
-				console.log(this.countryName)
-				console.log('Correct guess')
+				this.countryListSplice.splice(this.correctIndexToSplice, 1)
 				this.score++
 			} else {
 				console.log('Wrong answer')
 			}
 			setTimeout(this.displayQuestion, 1000)
+		},
+
+		answerClass(alternative) {
+			let answerClass = ''
+			if (alternative === this.countryName && this.answered) {
+				answerClass = 'correct'
+			} else if (this.answered) {
+				answerClass = 'incorrect'
+			}
+
+			return answerClass
 		},
 	},
 	data() {
@@ -125,17 +141,8 @@ export default {
 			score: 0,
 			questionCounter: 0,
 			quitGame: false,
-			questions: [
-				{
-					question: 'Question',
-					suggestions: [
-						{ suggestion: 'Answer 1' },
-						{ suggestion: 'Answer 2' },
-						{ suggestion: 'Answer 3' },
-						{ suggestion: 'Answer 4' },
-					],
-				},
-			],
+			answered: false,
+			correctIndexToSplice: Number,
 		}
 	},
 }
@@ -180,6 +187,14 @@ button {
 }
 
 .box-flag {
+}
+
+.correct {
+	background-color: green;
+}
+
+.incorrect {
+	background-color: red;
 }
 
 .img-flag {
