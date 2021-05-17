@@ -19,7 +19,10 @@ export default {
     button{
         font-family: Arial, sans-serif;
         font-size: 25px;
-        color: #f7931e;
-        background-color: #3333ff;
+        color: #F5B442;
+        background-color: #125DB3;
+    }
+    button:hover{
+      background-color: #4188d7;
     }
 </style>

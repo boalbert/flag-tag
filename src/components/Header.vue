@@ -4,8 +4,8 @@
 			<img class="logo-img" src="../img/logga.png" alt="logo" />
 		</div>
 
-		<div>
-			<p>- “Use your swag to brag in FlagTag!”</p>
+		<div class="motto">
+			<p>Use your swag to brag in FlagTag!</p>
 		</div>
 
 		<div>
@@ -65,6 +65,9 @@ header > div {
 .logo-img {
 	width: 130px;
 	height: 100%;
+}
+.motto{
+  color: #125DB3;
 }
 
 .router-links {
