@@ -1,6 +1,6 @@
 <template>
 	<div class="game-container">
-		<button v-if="!gameStarted" v-on:click="displayQuestion">
+		<button class="start-button" v-if="!gameStarted" v-on:click="displayQuestion">
 			Start
 		</button>
 		<div v-if="gameStarted" class="quiz">
@@ -13,7 +13,7 @@
 					<img class="img-flag" v-bind:src="this.countryFlag" />
 				</div>
 				<div class="box-suggestion">
-					<ul>
+					<ul class="list-answers">
 						<li
 							v-for="(alternative, index) in alternatives"
 							v-bind:key="index"
@@ -23,10 +23,11 @@
 							{{ alternative }}
 						</li>
 					</ul>
+          <button class="quit-button" v-on:click="quitGame = true">
+            Quit / Show score
+          </button>
 				</div>
-				<button v-on:click="quitGame = true">
-					Quit / Show score
-				</button>
+
 			</div>
 			<div v-if="quitGame" class="results">
 				<h2>Your score:</h2>
@@ -39,7 +40,6 @@
 </template>
 <script>
 import _ from 'lodash'
-console.log('Game Value')
 export default {
 	name: 'Game',
 	methods: {
@@ -156,19 +156,38 @@ h1 {
 button {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
-	color: #f7931e;
-	background-color: #3333ff;
+	color: #F5B442;
+	background-color: #125DB3;
 }
 
 .game-container {
-	display: grid;
-	/* border: 2px solid blue; */
+	display: flex;
+  margin: auto;
+  padding: 10px;
+  justify-content: center;
+  width: 20%;
+  height: 40px;
+
+}
+
+.start-button{
+  width: 400px;
+  height: 60px;
+  border: none;
+  font-size: 22px;
+  margin: 4px 2px;
+  border-radius: 5px;
+  text-align: center;
+}
+button:hover{
+  background-color: #4188d7;
+  text-align: center;
 }
 
 .quiz {
 	display: grid;
 	/* border: 2px solid red; */
-	width: 500px;
+	width: 700px;
 	height: 800px;
 	margin: 0 auto;
 
@@ -178,12 +197,15 @@ button {
 
 .header {
 	/* background-color: green; */
+  margin: auto;
 }
 
 .results {
+  width: 700px;
 }
 
 .main {
+  width: auto;
 }
 
 .box-flag {
@@ -207,7 +229,7 @@ button {
 }
 
 .box-suggestion {
-	display: flex;
+	display: block;
 	/* flex-direction: column; */
 	/* border: 2px solid green; */
 	justify-content: center;
@@ -216,15 +238,43 @@ button {
 
 ul {
 	padding: 0;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /*width: 700px;*/
 }
 
 li {
-	cursor: pointer;
-	list-style: none;
-	width: 400px;
-	border: 1px solid rgb(175, 175, 175);
-	margin-bottom: 8px;
-	border-radius: 5px;
-	padding: 5px;
+  cursor: pointer;
+  list-style: none;
+  width: 180px;
+  height: 40px;
+  border: 1px solid rgb(175, 175, 175);
+  margin-bottom: 8px;
+  margin: auto;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #125DB3;
+  color: #F5B442;
+}
+
+li:hover{
+  background-color: #4188d7;
+}
+
+.quit-button{
+  cursor: pointer;
+  list-style: none;
+  width: 180px;
+  height: 50px;
+  border: 1px solid rgb(175, 175, 175);
+  margin-bottom: 8px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #125DB3;
+  color: #F5B442;
+  position: relative;
+  top: 30px;
 }
 </style>
