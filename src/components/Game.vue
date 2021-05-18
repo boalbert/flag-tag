@@ -1,8 +1,23 @@
 <template>
 	<div class="game-container">
-		<button class="start-button" v-if="!gameStarted" v-on:click="displayQuestion">
-			Start
+		<button class="start-button" v-if="!gameStarted" v-on:click="displayQuestion('')">
+			All countries
 		</button>
+    <button class="start-button" v-if="!gameStarted" v-on:click="displayQuestion('Europe')">
+      Europe
+    </button>
+    <button class="start-button" v-if="!gameStarted" v-on:click="displayQuestion('Americas')">
+      Americas
+    </button>
+    <button class="start-button" v-if="!gameStarted" v-on:click="displayQuestion('Asia')">
+      Asia
+    </button>
+    <button class="start-button" v-if="!gameStarted" v-on:click="displayQuestion('Africa')">
+      Africa
+    </button>
+    <button class="start-button" v-if="!gameStarted" v-on:click="displayQuestion('Oceania')">
+      Oceania
+    </button>
 		<div v-if="gameStarted" class="quiz">
 			<div v-if="!quitGame" class="header">
 				<h1>Question {{ questionCounter }}</h1>
@@ -34,6 +49,7 @@
 				<p>Score: {{ score }}</p>
 				<p>Questions: {{ questionCounter }}</p>
 				<button v-on:click="resetRound">Play again?</button>
+<!--        <button>Change region?</button>  -->
 			</div>
 		</div>
 	</div>
@@ -74,37 +90,72 @@ export default {
 			}
 			let index = Math.floor(Math.random() * this.countryListSplice.length)
 
-			this.correctIndexToSplice = this.countryListSplice[index]
+			this.correctIndexToSplice = index
 			return this.countryListSplice[index]
 		},
+
+    async createRegionQuestion(region) {
+
+      if(this.regionList.length == 0) {
+        this.regionList = await this.getCountriesByRegion(region)
+        this.countryListSplice = [...this.regionList]
+      }
+
+        if(this.selectedRegion != region){
+          this.regionList = await this.getCountriesByRegion(region)
+          this.countryListSplice = [...this.regionList]
+        }
+
+      let index = Math.floor(Math.random() * this.countryListSplice.length)
+
+      this.correctIndexToSplice = index
+      return this.countryListSplice[index]
+    },
 
 		resetRound() {
 			this.questionCounter = 0
 			this.gameStarted = true
 			this.score = 0
 			this.quitGame = false
-			this.displayQuestion()
+			this.displayQuestion(this.selectedRegion)
 		},
-		async displayQuestion() {
+		async displayQuestion(region) {
 			this.answered = false
 			this.questionCounter++
 			this.gameStarted = true
 			this.quitGame = false
 			this.alternatives = []
+      this.selectedRegion = region
+      let country;
 
-			let country = await this.createQuestion()
+			if(region === ''){
+        country = await this.createQuestion()
+      }else {
+        country = await this.createRegionQuestion(region)
+      }
+
 			this.countryName = country.name
 			this.countryFlag = country.flag
 			this.alternatives.push(country.name)
-			while (this.alternatives.length < 4) {
-				let index = Math.floor(Math.random() * this.countryListOriginal.length)
-				if (!this.alternatives.includes(this.countryListOriginal[index].name)) {
-					this.alternatives.push(this.countryListOriginal[index].name)
-				}
-			}
+
+      if(region === '') {
+        while (this.alternatives.length < 4) {
+          let index = Math.floor(Math.random() * this.countryListOriginal.length)
+          if (!this.alternatives.includes(this.countryListOriginal[index].name)) {
+            this.alternatives.push(this.countryListOriginal[index].name)
+          }
+        }
+      } else {
+        while (this.alternatives.length < 4) {
+          let index = Math.floor(Math.random() * this.regionList.length)
+          if (!this.alternatives.includes(this.regionList[index].name)) {
+            this.alternatives.push(this.regionList[index].name)
+          }
+        }
+      }
 			this.alternatives = _.shuffle(this.alternatives)
 		},
-		checkAnswer(alternative) {
+		checkAnswer(alternative) {console.log(alternative)
 			this.answered = true
 
 			let selectedAnswer = alternative
@@ -113,17 +164,18 @@ export default {
 			if (this.countryName === selectedAnswer) {
 				this.countryListSplice.splice(this.correctIndexToSplice, 1)
 				this.score++
+        console.log('Correct answer')
 			} else {
 				console.log('Wrong answer')
 			}
-			setTimeout(this.displayQuestion, 1000)
+			setTimeout(this.displayQuestion,1000, this.selectedRegion);
 		},
 
 		answerClass(alternative) {
 			let answerClass = ''
-			if (alternative === this.countryName && this.answered) {
+			if (alternative === this.countryName && this.answered) {console.log('I if')
 				answerClass = 'correct'
-			} else if (this.answered) {
+			} else if (this.answered) {console.log('I else - if')
 				answerClass = 'incorrect'
 			}
 
@@ -134,7 +186,9 @@ export default {
 		return {
 			gameStarted: false,
 			countryListOriginal: [],
+      regionList: [],
 			countryListSplice: [],
+      selectedRegion: '',
 			countryName: '',
 			countryFlag: '',
 			alternatives: [],
