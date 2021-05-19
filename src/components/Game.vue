@@ -80,6 +80,9 @@
 import _ from 'lodash'
 export default {
 	name: 'Game',
+	props: {
+		challenge: Boolean,
+	},
 	methods: {
 		getAllCountries() {
 			return new Promise((resolve, reject) => {
@@ -162,7 +165,7 @@ export default {
 			this.resetTimer()
 			this.questionCounter = 0
 			this.gameStarted = true
-			this.score = 0
+			this.correctAnswer = 0
 			this.quitGame = false
 			this.startTimer()
 
@@ -215,6 +218,10 @@ export default {
 				}
 			}
 			this.alternatives = _.shuffle(this.alternatives)
+
+			if (this.challenge === true && this.questionCounter === 21) {
+				this.quitShowScore()
+			}
 		},
 		checkAnswer(alternative) {
 			console.log(alternative)

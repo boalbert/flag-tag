@@ -28,6 +28,13 @@ const routes = [
 		name: 'GamePage',
 		component: GamePage,
 	},
+
+	{
+		path: '/challengepage',
+		name: 'ChallengePage',
+		component: () =>
+			import(/* webpackChunkName: "about" */ '../views/ChallengePage.vue'),
+	},
 ]
 
 const router = new VueRouter({
