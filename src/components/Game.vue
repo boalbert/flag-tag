@@ -178,6 +178,9 @@ export default {
 			this.quitGame = true
 			this.stopTimer()
 			this.calculateTotalScore()
+      if (this.challenge && this.selectedRegion === ''){
+        this.postHighScore(this.totalScore)
+      }
 		},
 		async displayQuestion(region) {
 			this.answered = false
@@ -252,6 +255,24 @@ export default {
 
 			return answerClass
 		},
+    postHighScore(highScore){
+      let userId = localStorage.getItem("userId")
+      let getHighScore = {
+        userId : userId,
+        highScore: highScore
+      }
+      fetch('http://localhost:3000/highScore', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(getHighScore),
+      })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+          })
+    }
 	},
 	data() {
 		return {
