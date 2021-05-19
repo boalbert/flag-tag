@@ -1,6 +1,13 @@
 <template>
   <div>
     <button @click="changeName = !changeName" class="change-button">Change username</button>
+    <div v-if="errors.length">
+      <ul v-for="error in errors" :key="error.param">
+        <li class="error">
+          {{ error.msg }}
+        </li>
+      </ul>
+    </div>
     <div v-if="changeName" class="changeName-form">
       <form @submit.prevent="submitNewUsername(newUsername)">
         <input
@@ -27,17 +34,16 @@ export default {
   data() {
     return {
       newUsername: '',
-      changeName: false
+      changeName: false,
+      errors: {}
     }
   },
 
   methods: {
     submitNewUsername(newUsername) {
-      console.log(newUsername)
-      console.log(localStorage.getItem('userId'))
+      this.errors = ''
       let userId = localStorage.getItem('userId')
       let newDetails = {"userId": userId, "newUser": newUsername}
-      console.log(newDetails)
 
       fetch('http://localhost:3000/users/update', {
         method: 'PUT',
@@ -51,14 +57,14 @@ export default {
           .then((response) => response.json())
           .then((data) => {
             if (!data.success) {
-              // Error message is sent to SignUpForm component as array and displayed there
               this.errors = data.errors
+              console.log(this.errors)
             } else if (data.success) {
-              console.log(data.user.username)
               localStorage.setItem('userName', data.user.username)
               bus.$emit('current-username', data.user.username)
             }
           })
+      this.newUsername = ''
     },
   },
 }
@@ -90,5 +96,10 @@ button {
 
 .change-button {
   padding: 5px;
+}
+
+.error {
+  color: #b00020;
+  list-style: none;
 }
 </style>
