@@ -97,11 +97,13 @@ export default {
     async createRegionQuestion(region) {
 
       if(this.regionList.length == 0) {
+        this.selectedRegion = region
         this.regionList = await this.getCountriesByRegion(region)
         this.countryListSplice = [...this.regionList]
       }
 
         if(this.selectedRegion != region){
+          this.selectedRegion = region
           this.regionList = await this.getCountriesByRegion(region)
           this.countryListSplice = [...this.regionList]
         }
@@ -114,10 +116,9 @@ export default {
 
 		resetRound() {
 			this.questionCounter = 0
-			this.gameStarted = true
+			this.gameStarted = false
 			this.score = 0
 			this.quitGame = false
-			this.displayQuestion(this.selectedRegion)
 		},
 		async displayQuestion(region) {
 			this.answered = false
@@ -125,7 +126,6 @@ export default {
 			this.gameStarted = true
 			this.quitGame = false
 			this.alternatives = []
-      this.selectedRegion = region
       let country;
 
 			if(region === ''){
@@ -173,9 +173,9 @@ export default {
 
 		answerClass(alternative) {
 			let answerClass = ''
-			if (alternative === this.countryName && this.answered) {console.log('I if')
+			if (alternative === this.countryName && this.answered) {
 				answerClass = 'correct'
-			} else if (this.answered) {console.log('I else - if')
+			} else if (this.answered) {
 				answerClass = 'incorrect'
 			}
 
@@ -212,10 +212,12 @@ button {
 	font-size: 16px;
 	color: #F5B442;
 	background-color: #125DB3;
+  min-width: 30vw;
 }
 
 .game-container {
 	display: flex;
+  flex-wrap: wrap;
   margin: auto;
   padding: 10px;
   justify-content: center;
