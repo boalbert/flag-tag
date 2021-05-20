@@ -179,7 +179,6 @@ export default {
 			this.questionCounter = 0
 			this.gameStarted = false
 			this.quitGame = false
-			this.startTimer()
 		},
 
 		quitShowScore() {
