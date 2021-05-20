@@ -16,10 +16,14 @@ export default {
 </script>
 
 <style>
+@import './css/main.css';
+
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans&display=swap');
 
+
+
 p {
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 130%;
 }
 
@@ -35,9 +39,7 @@ h2 {
 	font-size: 30px;
 }
 
-p {
-	font-size: 16px;
-}
+
 
 #app {
 
@@ -47,4 +49,7 @@ p {
 	text-align: center;
 	color: #3333ff;
 }
+
+
+
 </style>
