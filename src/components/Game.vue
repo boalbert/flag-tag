@@ -177,10 +177,8 @@ export default {
 			this.totalScore = 0
 			this.resetTimer()
 			this.questionCounter = 0
-
 			this.gameStarted = false
 			this.quitGame = false
-			this.correctAnswer = 0
 			this.startTimer()
 		},
 
@@ -189,6 +187,9 @@ export default {
 			this.quitGame = true
 			this.stopTimer()
 			this.calculateTotalScore()
+      if (this.challenge && this.selectedRegion === ''){
+        this.postHighScore(this.totalScore)
+      }
 		},
 		async displayQuestion(region) {
 			this.answered = false
@@ -196,7 +197,6 @@ export default {
 			this.gameStarted = true
 			this.quitGame = false
 			this.alternatives = []
-
       let country;
 
 			if (region === '') {
@@ -254,15 +254,31 @@ export default {
 		answerClass(alternative) {
 			let answerClass = ''
 			if (alternative === this.countryName && this.answered) {
-
 				answerClass = 'correct'
 			} else if (this.answered) {
-
 				answerClass = 'incorrect'
 			}
 
 			return answerClass
 		},
+    postHighScore(highScore){
+      let userId = localStorage.getItem("userId")
+      let getHighScore = {
+        userId : userId,
+        highScore: highScore
+      }
+      fetch('http://localhost:3000/highScore', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(getHighScore),
+      })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+          })
+    }
 	},
 	data() {
 		return {
@@ -303,7 +319,6 @@ h1 {
 button {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
-
 	color: #F5B442;
 	background-color: #125DB3;
   min-width: 30vw;
@@ -312,7 +327,6 @@ button {
 
 .game-container {
 	display: flex;
-
   flex-wrap: wrap;
   margin: auto;
   padding: 10px;
