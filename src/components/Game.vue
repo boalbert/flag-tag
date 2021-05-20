@@ -130,6 +130,19 @@ export default {
 				this.countryListSplice = [...this.regionList]
 			}
 
+
+      if(this.regionList.length == 0) {
+        this.selectedRegion = region
+        this.regionList = await this.getCountriesByRegion(region)
+        this.countryListSplice = [...this.regionList]
+      }
+
+        if(this.selectedRegion != region){
+          this.selectedRegion = region
+          this.regionList = await this.getCountriesByRegion(region)
+          this.countryListSplice = [...this.regionList]
+        }
+
 			let index = Math.floor(Math.random() * this.countryListSplice.length)
 
 			this.correctIndexToSplice = index
@@ -164,13 +177,11 @@ export default {
 			this.totalScore = 0
 			this.resetTimer()
 			this.questionCounter = 0
-			this.gameStarted = true
-			this.correctAnswer = 0
-			this.quitGame = false
-			this.startTimer()
 
-			// Ändra till redirect 'Select Game'?
-			this.displayQuestion(this.selectedRegion)
+			this.gameStarted = false
+			this.quitGame = false
+			this.correctAnswer = 0
+			this.startTimer()
 		},
 
 		quitShowScore() {
@@ -185,8 +196,8 @@ export default {
 			this.gameStarted = true
 			this.quitGame = false
 			this.alternatives = []
-			this.selectedRegion = region
-			let country
+
+      let country;
 
 			if (region === '') {
 				country = await this.createQuestion()
@@ -243,10 +254,10 @@ export default {
 		answerClass(alternative) {
 			let answerClass = ''
 			if (alternative === this.countryName && this.answered) {
-				console.log('I if')
+
 				answerClass = 'correct'
 			} else if (this.answered) {
-				console.log('I else - if')
+
 				answerClass = 'incorrect'
 			}
 
@@ -292,17 +303,22 @@ h1 {
 button {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
-	color: #f5b442;
-	background-color: #125db3;
+
+	color: #F5B442;
+	background-color: #125DB3;
+  min-width: 30vw;
+
 }
 
 .game-container {
 	display: flex;
-	margin: auto;
-	padding: 10px;
-	justify-content: center;
-	width: 20%;
-	height: 40px;
+
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 10px;
+  justify-content: center;
+  width: 20%;
+  height: 40px;
 }
 
 .start-button {
