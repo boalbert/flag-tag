@@ -5,14 +5,10 @@
 		<h2>
 			Highscore
 		</h2>
-		<!-- <ol v-for="score in highscore" key="score.id"> -->
 		<ol>
-			<!-- <li>{{ score.username }} - {{ score.points }}</li> -->
-			<li>Name - 213p</li>
-			<li>Username - 200p</li>
-			<li>Player - 190p</li>
-			<li>User - 150p</li>
-			<li>Name - 50p</li>
+			<li v-for="(score,index) in highscore" v-bind:key="index">
+				{{ score.userName }} - {{ score.highScore }}
+			</li>
 		</ol>
 	</div>
 </template>
@@ -23,6 +19,24 @@ export default {
 	props: {
 		highscore: Array,
 	},
+	methods:{
+		getHighscore() {
+			fetch('http://localhost:3000/highscore/', {
+				method: 'GET',
+				headers: {
+				'Content-type': 'application/json',
+				},
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				this.highscore = data.users;
+				console.log(this.highscore)
+			})
+		},
+	},
+	mounted(){
+		this.getHighscore()
+	}
 }
 </script>
 
