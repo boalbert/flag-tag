@@ -130,18 +130,17 @@ export default {
 				this.countryListSplice = [...this.regionList]
 			}
 
+			if (this.regionList.length == 0) {
+				this.selectedRegion = region
+				this.regionList = await this.getCountriesByRegion(region)
+				this.countryListSplice = [...this.regionList]
+			}
 
-      if(this.regionList.length == 0) {
-        this.selectedRegion = region
-        this.regionList = await this.getCountriesByRegion(region)
-        this.countryListSplice = [...this.regionList]
-      }
-
-        if(this.selectedRegion != region){
-          this.selectedRegion = region
-          this.regionList = await this.getCountriesByRegion(region)
-          this.countryListSplice = [...this.regionList]
-        }
+			if (this.selectedRegion != region) {
+				this.selectedRegion = region
+				this.regionList = await this.getCountriesByRegion(region)
+				this.countryListSplice = [...this.regionList]
+			}
 
 			let index = Math.floor(Math.random() * this.countryListSplice.length)
 
@@ -186,9 +185,20 @@ export default {
 			this.quitGame = true
 			this.stopTimer()
 			this.calculateTotalScore()
-      if (this.challenge && this.selectedRegion === ''){
-        this.postHighScore(this.totalScore)
-      }
+
+			let currentHighScore = localStorage.getItem('highScore')
+			console.log('Old score' + currentHighScore)
+			let newHighScore = this.totalScore
+			console.log('New score' + newHighScore)
+
+			if (
+				this.challenge &&
+				this.selectedRegion === '' &&
+				currentHighScore < newHighScore
+			) {
+				localStorage.setItem('highScore', newHighScore)
+				this.postHighScore(this.totalScore)
+			}
 		},
 		async displayQuestion(region) {
 			this.answered = false
@@ -196,7 +206,7 @@ export default {
 			this.gameStarted = true
 			this.quitGame = false
 			this.alternatives = []
-      let country;
+			let country
 
 			if (region === '') {
 				country = await this.createQuestion()
@@ -260,24 +270,24 @@ export default {
 
 			return answerClass
 		},
-    postHighScore(highScore){
-      let userId = localStorage.getItem("userId")
-      let getHighScore = {
-        userId : userId,
-        highScore: highScore
-      }
-      fetch('http://localhost:3000/highScore', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(getHighScore),
-      })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data)
-          })
-    }
+		postHighScore(highScore) {
+			let userId = localStorage.getItem('userId')
+			let getHighScore = {
+				userId: userId,
+				highScore: highScore,
+			}
+			fetch('http://localhost:3000/highScore', {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify(getHighScore),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data)
+				})
+		},
 	},
 	data() {
 		return {
@@ -318,20 +328,19 @@ h1 {
 button {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
-	color: #F5B442;
-	background-color: #125DB3;
-  min-width: 30vw;
-
+	color: #f5b442;
+	background-color: #125db3;
+	min-width: 30vw;
 }
 
 .game-container {
 	display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  padding: 10px;
-  justify-content: center;
-  width: 20%;
-  height: 40px;
+	flex-wrap: wrap;
+	margin: auto;
+	padding: 10px;
+	justify-content: center;
+	width: 20%;
+	height: 40px;
 }
 
 .start-button {
