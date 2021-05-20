@@ -27,7 +27,9 @@ section {
 	flex-direction: column;
 	width: 95%;
 	margin: 0 auto;
-	max-width: 1400px;
+	justify-content: center;
+	grid-column-start: 2;
+	gap: 20px;
 }
 
 @media screen and (min-width: 1050px) {
@@ -35,6 +37,7 @@ section {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		justify-items: stretch;
+		max-width: 1400px;
 	}
 }
 
@@ -43,7 +46,7 @@ button:hover {
 }
 
 .button__gameOptions {
-	background-color: #007bff;
+	background-color: #1b4d7a;
 	text-transform: uppercase;
 	font-size: 25px;
 	width: 300px;
@@ -58,12 +61,5 @@ button:hover {
 	font-size: 25px;
 	border: 0;
 	background-color: none;
-}
-
-.game-mode-container {
-	display: flex;
-	flex-direction: column;
-	grid-column-start: 2;
-	margin: 0 auto;
 }
 </style>

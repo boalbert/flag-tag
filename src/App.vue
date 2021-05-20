@@ -19,32 +19,30 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans&display=swap');
 
 p {
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 130%;
 }
 
 h1 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-h1 {
+	font-family: 'Space Mono', monospace;
+	letter-spacing: 2px;
 	font-size: 45px;
 }
 
 h2 {
+	font-family: 'Space Mono', monospace;
+	letter-spacing: 2px;
 	font-size: 30px;
 }
 
-p {
-	font-size: 16px;
-}
-
 #app {
-
-	font-family: 'Open Sans', Arial, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: #3333ff;
+	color: black;
+
+	margin: 0 auto;
+	background-color: #faf8f0;
 }
 </style>

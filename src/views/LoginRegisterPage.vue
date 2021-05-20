@@ -1,30 +1,21 @@
 <template>
-	<main>
-		<div class="form-container">
-			<div v-if="!accountExists">
-				<LoginForm @login-account="loginAccount" :errors="errors" />
-			</div>
-			<div v-else>
-				<SignUpForm @register-account="postNewAccount" :errors="errors" />
-			</div>
+	<div class="login-registerpage-container">
+		<LoginForm
+			v-if="!accountExists"
+			@login-account="loginAccount"
+			:errors="errors"
+		/>
 
-			<p
-				@click="showLoginOrSignupComponent"
-				v-if="!accountExists"
-				class="text--underline text__smallLoginText"
-			>
-				Log in to my existing account.
-			</p>
+		<SignUpForm v-else @register-account="postNewAccount" :errors="errors" />
 
-			<p
-				@click="showLoginOrSignupComponent"
-				v-if="accountExists"
-				class="text--underline text__smallLoginText"
-			>
-				Oops! I need to create an account.
-			</p>
-		</div>
-	</main>
+		<p @click="showLoginOrSignupComponent" v-if="!accountExists">
+			Log in to my existing account.
+		</p>
+
+		<p @click="showLoginOrSignupComponent" v-if="accountExists">
+			Oops! I need to create an account.
+		</p>
+	</div>
 </template>
 
 <script>
@@ -111,66 +102,14 @@ export default {
 </script>
 
 <style>
-main {
+.login-registerpage-container {
 	display: flex;
 	flex-direction: column;
-	width: 95%;
-	margin: 15px auto;
-	max-width: 1400px;
-}
-
-.form-container {
+	width: 400px;
+	height: 500px;
 	margin: 0 auto;
-	border: 1px solid rgb(243, 243, 243);
-	padding: 40px 80px;
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-}
-
-.button_signup-login {
-	color: #f7931e;
-	border-radius: 5px;
-	border: 1px solid rgb(243, 243, 243);
-	margin-top: 20px;
-	height: 70px;
-	font-size: 20px;
-}
-
-@media screen and (min-width: 1050px) {
-	.button_signup-login {
-		height: 35px;
-	}
-}
-
-button {
-	background-color: #3333ff;
-}
-
-.text--underline {
-	text-decoration: underline;
-}
-
-.text__smallLoginText {
-	font-size: 14px;
-}
-
-.text--underline:hover {
-	cursor: pointer;
-}
-p {
-	font-family: Arial, sans-serif;
-	color: #3333ff;
-}
-
-.error-text {
-	color: #b00020;
-}
-
-.error-text--heading {
-	font-size: 15px;
-}
-
-.listItem--error {
-	font-size: 14px;
-	padding: 0px;
+	box-shadow: 7px 7px;
+	background-color: white;
+	border: 2px solid black;
 }
 </style>

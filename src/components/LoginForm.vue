@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2>🔐</h2>
+		<h1><i class="fas fa-key"></i></h1>
 		<h1>Sign In</h1>
 
 		<!-- Display errors in login-details -->
@@ -31,7 +31,7 @@
 					name="password"
 					v-model.trim="loginDetails.password"
 				/>
-				<button type="submit" class="button_signup-login button--green">
+				<button type="submit" class="button_signup-login">
 					Log In
 				</button>
 			</div>
@@ -62,14 +62,44 @@ export default {
 }
 </script>
 
-<style>
-    h1{
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 30px;
-        color: #f7931e;
-    }
-    .button_signup-login {
-        font-family: Arial, sans-serif;
-        color: #3333ff;
-    }
+<style scoped>
+section {
+	height: 500px;
+}
+label {
+	padding: 10px 0;
+	text-align: left;
+	font-weight: bold;
+}
+input {
+	height: 35px;
+	border: 2px solid rgb(238, 237, 237);
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 18px;
+}
+.input__container {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	width: 10rem;
+}
+
+.button_signup-login {
+	margin-top: 20px;
+	width: 240px;
+	height: 65px;
+	background-color: #f58442;
+	font-weight: bold;
+	font-family: 'Space Mono', monospace;
+	box-shadow: 2px 2px;
+	font-size: 20px;
+	border: none;
+}
+
+@media screen and (min-width: 1050px) {
+	.input__container {
+		width: 15rem;
+	}
+}
 </style>
