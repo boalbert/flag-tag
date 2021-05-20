@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<div class="form-container">
-			<div v-if="accountExists">
+			<div v-if="!accountExists">
 				<LoginForm @login-account="loginAccount" :errors="errors" />
 			</div>
 			<div v-else>
@@ -87,7 +87,8 @@ export default {
 					if (data.users.length > 0) {
 						this.saveUserDetailsLocalStorage(
 							data.users[0].userId,
-							data.users[0].userName
+							data.users[0].userName,
+							data.users[0].highScore
 						)
 						this.$router.push('/')
 					} else {
@@ -99,9 +100,10 @@ export default {
 				})
 		},
 
-		saveUserDetailsLocalStorage(userId, userName) {
+		saveUserDetailsLocalStorage(userId, userName, highScore) {
 			localStorage.setItem('userId', userId)
 			localStorage.setItem('userName', userName)
+			localStorage.setItem('highScore', highScore)
 			bus.$emit('login-status', true)
 		},
 	},
@@ -126,8 +128,8 @@ main {
 
 .button_signup-login {
 	color: #f7931e;
-    border-radius: 5px;
-    border: 1px solid rgb(243, 243, 243);
+	border-radius: 5px;
+	border: 1px solid rgb(243, 243, 243);
 	margin-top: 20px;
 	height: 70px;
 	font-size: 20px;
@@ -141,7 +143,6 @@ main {
 
 button {
 	background-color: #3333ff;
-
 }
 
 .text--underline {
@@ -156,8 +157,8 @@ button {
 	cursor: pointer;
 }
 p {
-    font-family: Arial, sans-serif;
-    color: #3333ff;
+	font-family: Arial, sans-serif;
+	color: #3333ff;
 }
 
 .error-text {

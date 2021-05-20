@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<p>Logged in as {{userInfo.userName}} </p>
+		
 	</div>
 </template>
 
