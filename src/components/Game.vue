@@ -53,7 +53,7 @@
 
 		<section v-if="gameStarted" class="quiz">
 			<header v-if="!quitGame">
-				<h2>Question {{ questionCounter }}</h2>
+				<h2>Question {{ questionCounter }}<span v-if="challenge">/20</span></h2>
 
 				<h3>Correct flags: {{ correctAnswer }}</h3>
 			</header>
@@ -418,6 +418,15 @@ h3 {
 	);
 }
 
+.button__random:hover {
+	background: rgb(195, 193, 34);
+	background: radial-gradient(
+		circle,
+		rgba(195, 193, 34, 1) 10%,
+		rgba(240, 45, 253, 1) 90%
+	);
+}
+
 .quiz {
 	display: flex;
 	width: 100%;
@@ -506,6 +515,7 @@ li {
 	overflow: hidden;
 	overflow-wrap: break-word;
 	width: 150px;
+	text-align: center;
 }
 
 .button--quit {

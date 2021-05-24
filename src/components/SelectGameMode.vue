@@ -82,6 +82,7 @@ p {
 
 .card-body {
 	display: flex;
+	border-bottom: 2px solid black;
 }
 
 .card-left-container {

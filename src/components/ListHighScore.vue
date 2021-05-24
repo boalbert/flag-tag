@@ -50,9 +50,11 @@ h2 {
 .highscore-header {
 	background-color: #f5b442;
 	padding: 0px;
+	border-bottom: 2px solid black;
 }
 .highscore-container {
 	margin: 0 auto;
+	margin-bottom: 20px;
 	text-align: center;
 	box-shadow: 7px 7px;
 	border: 2px solid black;
@@ -67,6 +69,6 @@ ol {
 	text-align: center;
 }
 li {
-	font-size: 18px;
+	font-size: 16px;
 }
 </style>

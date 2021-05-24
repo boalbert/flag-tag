@@ -78,6 +78,8 @@ header {
 		grid-template-columns: 1fr auto auto auto;
 		justify-content: space-around;
 		height: 100px;
+		margin-left: 15px;
+		margin-right: 15px;
 	}
 	.logo {
 		justify-self: flex-start;

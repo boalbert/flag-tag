@@ -41,7 +41,7 @@ h2 {
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: black;
-
+	max-width: 1400px;
 	margin: 0 auto;
 	background-color: #faf8f0;
 }
