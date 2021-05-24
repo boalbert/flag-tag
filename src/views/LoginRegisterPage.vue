@@ -65,8 +65,12 @@ export default {
 				.then((data) => {
 					if (!data.success) {
 						// Error message is sent to SignUpForm component as array and displayed there
+
 						this.errors = data.errors
 					} else if (data.success) {
+						this.userInfo.loggedIn = true
+						this.userInfo.userName = data.users.username
+						bus.$emit('login-status', this.userInfo)
 						this.saveUserDetailsLocalStorage(
 							data.users.userId,
 							data.users.username
@@ -110,7 +114,6 @@ export default {
 			localStorage.setItem('userId', userId)
 			localStorage.setItem('userName', userName)
 			localStorage.setItem('highScore', highScore)
-			
 		},
 	},
 }
