@@ -1,12 +1,11 @@
 <template>
 	<div>
-		<h1><i class="fas fa-key"></i></h1>
 		<h1>Sign In</h1>
 
 		<!-- Display errors in login-details -->
 		<div v-if="errors.length > 0">
 			<ul>
-				<li class="error-text listItem--error">
+				<li class="text--error text__red">
 					{{ errors }}
 				</li>
 			</ul>
@@ -82,12 +81,18 @@ input {
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
-	width: 10rem;
+	width: 15rem;
+}
+
+.icon-signup-login {
+	text-shadow: 1px 1px 1px #ccc;
+	font-size: 60px;
+	padding: 15px;
 }
 
 .button_signup-login {
 	margin-top: 20px;
-	width: 240px;
+	width: 15rem;
 	height: 65px;
 	background-color: #f58442;
 	font-weight: bold;
@@ -95,6 +100,15 @@ input {
 	box-shadow: 2px 2px;
 	font-size: 20px;
 	border: none;
+	align-self: center;
+}
+.text--error {
+	font-size: 13px;
+	list-style: none;
+	text-align: center;
+}
+.text__red {
+	color: #aa001f;
 }
 
 @media screen and (min-width: 1050px) {

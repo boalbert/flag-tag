@@ -8,11 +8,19 @@
 
 		<SignUpForm v-else @register-account="postNewAccount" :errors="errors" />
 
-		<p @click="showLoginOrSignupComponent" v-if="!accountExists">
+		<p
+			@click="showLoginOrSignupComponent"
+			v-if="accountExists"
+			class="login-signup-option"
+		>
 			Log in to my existing account.
 		</p>
 
-		<p @click="showLoginOrSignupComponent" v-if="accountExists">
+		<p
+			@click="showLoginOrSignupComponent"
+			v-if="!accountExists"
+			class="login-signup-option"
+		>
 			Oops! I need to create an account.
 		</p>
 	</div>
@@ -105,11 +113,22 @@ export default {
 .login-registerpage-container {
 	display: flex;
 	flex-direction: column;
-	width: 400px;
-	height: 500px;
 	margin: 0 auto;
 	box-shadow: 7px 7px;
 	background-color: white;
 	border: 2px solid black;
+	padding: 15px;
+}
+
+.login-signup-option {
+	text-decoration: underline;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+@media screen and (min-width: 1050px) {
+	.login-registerpage-container {
+		width: 400px;
+	}
 }
 </style>

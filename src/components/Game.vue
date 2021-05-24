@@ -5,7 +5,7 @@
 				class="start-button button__all-countries"
 				v-on:click="startGame('')"
 			>
-				<i class="fas fa-award"></i> All Countries
+				All Regions
 			</button>
 			<button
 				v-if="!challenge"
@@ -53,13 +53,15 @@
 
 		<section v-if="gameStarted" class="quiz">
 			<header v-if="!quitGame">
-				<h1>Question {{ questionCounter }}</h1>
+				<h2>Question {{ questionCounter }}</h2>
 
-				<h2>Correct flags: {{ correctAnswer }}</h2>
+				<h3>Correct flags: {{ correctAnswer }}</h3>
 			</header>
 			<main v-if="!quitGame">
 				<div class="box-flag">
-					<p class="timer">({{ formattedElapsedTime }})</p>
+					<p class="timer">
+						<i class="far fa-clock"></i> {{ formattedElapsedTime }}
+					</p>
 					<img class="img-flag" v-bind:src="this.countryFlag" />
 				</div>
 				<div class="box-suggestion">
@@ -78,24 +80,21 @@
 			</main>
 			<div v-if="quitGame" class="results">
 				<header>
-					<h1 class="h1-text-result">Result</h1>
+					<h2 class="h2-text-result">Result</h2>
 				</header>
 
 				<article class="results-stats-box">
-					<p class="stat-header">Total score:</p>
-					<p>{{ totalScore }}</p>
+					<!-- v-if newScore > highScore  -->
+					<div>
+						<h2>Wow!</h2>
+						<h3>You beat your last highscore!</h3>
+					</div>
 
-					<p class="stat-header">Correct flags:</p>
+					<p><b>Answered questions:</b> {{ questionCounter }}</p>
+					<p><b>Correct answers:</b> {{ correctAnswer }}</p>
+					<p><b>Time:</b> {{ formattedElapsedTime }} min(s)</p>
 
-					<p>
-						{{ correctAnswer }}
-					</p>
-
-					<p class="stat-header">Questions:</p>
-					<p>{{ questionCounter }}</p>
-
-					<p class="stat-header">Elapsed time:</p>
-					<p>{{ formattedElapsedTime }} min</p>
+					<p><b>Total score:</b> {{ totalScore }}p</p>
 				</article>
 
 				<button class="button--play-again" v-on:click="resetRound">
@@ -202,6 +201,7 @@ export default {
 		},
 
 		resetRound() {
+			this.correctAnswer = 0
 			this.totalScore = 0
 			this.resetTimer()
 			this.questionCounter = 0
@@ -357,11 +357,19 @@ export default {
 </script>
 <style scoped>
 h2 {
+	font-size: 25px;
+}
+
+h3 {
+	font-size: 19px;
+}
+h2,
+h3 {
 	font-family: 'Space Mono', monospace;
 	letter-spacing: 2px;
-	font-size: 30px;
 	color: black;
 }
+
 .game-container {
 	max-width: 1400px;
 	display: flex;
@@ -370,7 +378,6 @@ h2 {
 .select-game-region {
 	display: flex;
 	flex-direction: column;
-	gap: 15px;
 	align-self: center;
 }
 
@@ -384,7 +391,8 @@ h2 {
 	text-transform: uppercase;
 	border: 2px solid black;
 	box-shadow: 5px 5px;
-	width: 400px;
+	width: 320px;
+	margin: 5px;
 }
 .start-button:hover {
 	background-color: #f0c273;
@@ -412,18 +420,18 @@ h2 {
 
 .quiz {
 	display: flex;
-	width: 350px;
-	height: 930px;
+	width: 100%;
+	height: 100%;
 	margin: 0 auto;
 	box-shadow: 7px 7px;
 	border: 2px solid black;
 	background-color: white;
+	padding-bottom: 20px;
 }
 
 header {
 	background-color: #f5b442;
-	margin: 0 0 20px 0;
-	height: 200px;
+	/* height: 200px; */
 	width: 100%;
 	border-bottom: 3px solid black;
 }
@@ -434,34 +442,22 @@ header {
 	font-family: 'Space Mono', monospace;
 	font-weight: bolder;
 }
-.h1-text-result {
+.h2-text-result {
 	font-family: 'Space Mono', monospace;
 	letter-spacing: 2px;
-	font-size: 45px;
+	font-size: 30px;
 	color: black;
 	margin: 0;
 	padding: 15px;
 }
 .results-stats-box {
-	width: 200px;
-	margin: 0 auto;
-	text-align: left;
 	font-family: 'Space Mono', monospace;
-	display: grid;
-	grid-template-columns: auto auto;
-	justify-content: flex-start;
+	padding: 15px;
+	text-align: center;
 }
 
 .stat-header {
 	font-weight: bold;
-}
-
-.results {
-}
-
-.box-flag {
-	justify-content: center;
-	margin-bottom: 15px;
 }
 
 .correct {
@@ -471,21 +467,22 @@ header {
 .incorrect {
 	background-color: red;
 }
+.box-flag {
+	justify-content: center;
+	margin-bottom: 15px;
+}
 
 .img-flag {
-	height: 250px;
-	min-height: 300px;
-	width: 100%;
-	max-height: 350px;
+	height: 220px;
+	width: 95%;
+	max-width: 500px;
 	border: 2px solid black;
-	box-shadow: 5px 5px;
+	background-color: rgb(240, 240, 240);
 }
 
 .box-suggestion {
-	/* display: grid;
-	grid-template-columns: 1fr 1fr; */
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 }
 
 ul {
@@ -497,7 +494,6 @@ li {
 	color: black;
 	cursor: pointer;
 	list-style: none;
-	width: 220px;
 	height: 65px;
 	background-color: #f58442;
 	font-weight: bold;
@@ -509,6 +505,7 @@ li {
 	font-size: 16px;
 	overflow: hidden;
 	overflow-wrap: break-word;
+	width: 150px;
 }
 
 .button--quit {
@@ -548,6 +545,20 @@ li {
 }
 
 @media screen and (min-width: 1050px) {
+	h2 {
+		font-size: 25px;
+	}
+
+	h3 {
+		font-size: 19px;
+	}
+	li {
+		width: 190px;
+		height: 80px;
+		font-size: 17px;
+		padding: 2px;
+	}
+
 	.select-game-region {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -558,21 +569,12 @@ li {
 	}
 
 	.img-flag {
-		width: 480px;
-		height: 100%;
-		max-height: 280px;
-	}
-
-	.box-flag {
-		min-height: 300px;
+		width: 85%;
+		height: 300px;
 	}
 
 	.quiz {
 		width: 550px;
-		height: 900px;
-	}
-
-	.game-container {
 	}
 }
 </style>

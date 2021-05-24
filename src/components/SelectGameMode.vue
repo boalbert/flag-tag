@@ -82,7 +82,6 @@ p {
 
 .card-body {
 	display: flex;
-	height: 120px;
 }
 
 .card-left-container {
@@ -90,23 +89,19 @@ p {
 	width: 200px;
 }
 
-.card-right-container {
-	padding: 2px;
-}
-
 .button--startgame {
-	font-size: 23px;
 	width: 100%;
 	background-color: #f5b442;
 	border: none;
-	text-decoration: none;
-	text-align: center;
-	color: black;
-	font-family: monospace;
-	font-weight: bolder;
+
 	font-family: 'Space Mono', monospace;
-	letter-spacing: 5px;
+	font-size: 23px;
+	color: black;
+	text-align: center;
+	letter-spacing: 8px;
+	font-weight: bolder;
 	text-transform: uppercase;
+	margin: 0; /* Removes space around button for mobile-view */
 }
 
 .button--startgame:hover {

@@ -49,17 +49,18 @@ h2 {
 }
 .highscore-header {
 	background-color: #f5b442;
-	padding: 5px;
+	padding: 0px;
 }
 .highscore-container {
 	margin: 0 auto;
 	text-align: center;
 	box-shadow: 7px 7px;
 	border: 2px solid black;
-	height: 400px;
+	height: 300px;
 	display: flex;
 	flex-direction: column;
-	width: 400px;
+	width: 300px;
+	background-color: white;
 }
 ol {
 	font-family: 'Space Mono', monospace;

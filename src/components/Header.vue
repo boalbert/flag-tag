@@ -75,7 +75,7 @@ header {
 	header {
 		max-width: 1400px;
 		display: grid;
-		grid-template-columns: 1fr auto auto;
+		grid-template-columns: 1fr auto auto auto;
 		justify-content: space-around;
 		height: 100px;
 	}
