@@ -41,6 +41,10 @@ export default {
 		return {
 			accountExists: false,
 			errors: {},
+			userInfo: {
+				loggedIn: false,
+				userName: '',
+			},
 		}
 	},
 	methods: {
@@ -84,11 +88,14 @@ export default {
 					// Redirect to homepage
 					// Send loginstatus true via eventbus
 					if (data.users.length > 0) {
+						this.userInfo.loggedIn = true
+						this.userInfo.userName = data.users[0].userName
 						this.saveUserDetailsLocalStorage(
 							data.users[0].userId,
 							data.users[0].userName,
 							data.users[0].highScore
 						)
+						bus.$emit('login-status', this.userInfo)
 						this.$router.push('/')
 					} else {
 						// Login failed
@@ -103,7 +110,7 @@ export default {
 			localStorage.setItem('userId', userId)
 			localStorage.setItem('userName', userName)
 			localStorage.setItem('highScore', highScore)
-			bus.$emit('login-status', true)
+			
 		},
 	},
 }
@@ -111,6 +118,7 @@ export default {
 
 <style>
 .login-registerpage-container {
+	max-width: 500px;
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;

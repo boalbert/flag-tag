@@ -8,7 +8,7 @@
 			><i class="fas fa-home"> </i> HOME
 		</router-link>
 		<router-link to="/profile" v-if="signedIn" class="router-links"
-			><i class="fas fa-user-circle"></i> PROFILE</router-link
+			><i class="fas fa-user-circle"></i> {{ userName }}</router-link
 		>
 		<router-link to="/register" v-else class="router-links">
 			<i class="fas fa-sign-in-alt"> </i> SIGN IN<span></span>
@@ -24,13 +24,18 @@ export default {
 	data() {
 		return {
 			signedIn: false,
+			userName: String,
 		}
 	},
 	created() {
 		// Listen for login-status emitted by sign out / sign in functions.
 		// Used for displaying profile link or register link
 		bus.$on('login-status', (data) => {
-			this.signedIn = data
+			this.signedIn = data.loggedIn
+			this.userName = data.userName
+		})
+		bus.$on('current-username', (data) => {
+			this.userName = data
 		})
 	},
 }

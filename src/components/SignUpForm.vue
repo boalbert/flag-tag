@@ -69,9 +69,15 @@ label {
 input {
 	height: 35px;
 	border: 2px solid rgb(238, 237, 237);
-	border-radius: 5px;
+	border-radius: 0px;
+	border: 1px solid gray;
 	padding: 5px;
 	font-size: 18px;
+	box-shadow: 2px 2px;
+}
+
+input:focus {
+	outline: none;
 }
 .input__container {
 	display: flex;
