@@ -111,10 +111,14 @@ export default {
 				})
 		},
 
-		saveUserDetailsLocalStorage(userId, userName, highScore) {
+		saveUserDetailsLocalStorage(userId, userName) {let highscoreObject = {AllRegions: 0, Asia: 0, Americas: 0, Africa: 0, Europe: 0, Oceania: 0 }
 			localStorage.setItem('userId', userId)
 			localStorage.setItem('userName', userName)
-			localStorage.setItem('highScore', highScore)
+			localStorage.setItem('highScore', JSON.stringify(highscoreObject))
+
+      var string = localStorage.getItem("highScore")
+      var retstring = JSON.parse(string)
+      console.log(retstring)
 		},
 	},
 }

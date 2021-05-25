@@ -8,35 +8,30 @@
 				All Regions
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Europe')"
 			>
 				Europe
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Americas')"
 			>
 				Americas
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Asia')"
 			>
 				Asia
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Africa')"
 			>
 				Africa
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Oceania')"
 			>
@@ -227,9 +222,7 @@ export default {
 			let newHighScore = this.totalScore
 			console.log('New score' + newHighScore)
 
-			if (this.challenge &&
-				this.selectedRegion === 'AllRegions' &&
-				currentHighScore < newHighScore){
+			if (this.challenge){
 					
 				localStorage.setItem('highScore', newHighScore)
 				this.postHighScore(this.totalScore)
