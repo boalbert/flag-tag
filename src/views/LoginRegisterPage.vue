@@ -73,7 +73,8 @@ export default {
 						bus.$emit('login-status', this.userInfo)
 						this.saveUserDetailsLocalStorage(
 							data.users.userId,
-							data.users.username
+							data.users.username,
+							0
 						)
 
 						this.$router.push('/')
@@ -97,7 +98,7 @@ export default {
 						this.saveUserDetailsLocalStorage(
 							data.users[0].userId,
 							data.users[0].userName,
-							data.users[0].highScore
+							data.users[0].highScoreAllRegions
 						)
 						bus.$emit('login-status', this.userInfo)
 						this.$router.push('/')

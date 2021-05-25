@@ -3,7 +3,7 @@
 		<div class="select-game-region" v-if="!gameStarted">
 			<button
 				class="start-button button__all-countries"
-				v-on:click="startGame('')"
+				v-on:click="startGame('AllRegions')"
 			>
 				All Regions
 			</button>
@@ -210,7 +210,7 @@ export default {
 		},
 
 		randomRegion() {
-			let regions = ['Europe', 'Americas', 'Asia', 'Africa', 'Oceania', '']
+			let regions = ['Europe', 'Americas', 'Asia', 'Africa', 'Oceania', 'AllRegions']
 			console.log(Math.floor(Math.random() * 5))
 
 			return regions[Math.floor(Math.random() * regions.length + 1)]
@@ -227,12 +227,10 @@ export default {
 			let newHighScore = this.totalScore
 			console.log('New score' + newHighScore)
 
-			if (
-				(this.challenge &&
-					this.selectedRegion === '' &&
-					currentHighScore < newHighScore) ||
-				currentHighScore === null
-			) {
+			if (this.challenge &&
+				this.selectedRegion === 'AllRegions' &&
+				currentHighScore < newHighScore){
+					
 				localStorage.setItem('highScore', newHighScore)
 				this.postHighScore(this.totalScore)
 			}
@@ -245,7 +243,7 @@ export default {
 			this.alternatives = []
 			let country
 
-			if (region === '') {
+			if (region === 'AllRegions') {
 				country = await this.createQuestion()
 			} else {
 				country = await this.createRegionQuestion(region)
@@ -255,7 +253,7 @@ export default {
 			this.countryFlag = country.flag
 			this.alternatives.push(country.name)
 
-			if (region === '') {
+			if (region === 'AllRegions') {
 				while (this.alternatives.length < 4) {
 					let index = Math.floor(
 						Math.random() * this.countryListOriginal.length
@@ -312,6 +310,7 @@ export default {
 			let getHighScore = {
 				userId: userId,
 				highScore: highScore,
+				region: this.selectedRegion
 			}
 			fetch('http://localhost:3000/highScore', {
 				method: 'POST',
@@ -332,7 +331,7 @@ export default {
 			countryListOriginal: [],
 			regionList: [],
 			countryListSplice: [],
-			selectedRegion: '',
+			selectedRegion: 'AllRegions',
 			countryName: '',
 			countryFlag: '',
 			alternatives: [],
