@@ -42,11 +42,7 @@ button:hover {
 	cursor: pointer;
 }
 
-.button__darkMode {
-	font-size: 25px;
-	border: 0;
-	background-color: none;
-}
+
 
 @media screen and (min-width: 1050px) {
 	.align-flexend {

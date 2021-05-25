@@ -62,7 +62,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	width: 300px;
-	background-color: white;
+
 }
 ol {
 	font-family: 'Space Mono', monospace;
