@@ -65,20 +65,36 @@ export default {
 				.then((data) => {
 					if (!data.success) {
 						// Error message is sent to SignUpForm component as array and displayed there
-
 						this.errors = data.errors
 					} else if (data.success) {
 						this.userInfo.loggedIn = true
 						this.userInfo.userName = data.users.username
 						bus.$emit('login-status', this.userInfo)
+
+						let highScore = this.compareHighScore(0)
+
 						this.saveUserDetailsLocalStorage(
 							data.users.userId,
-							data.users.username
+							data.users.username,
+							highScore
 						)
+
+						this.postHighScore(highScore)
 
 						this.$router.push('/')
 					}
 				})
+		},
+
+		compareHighScore(loggedInHighScore) {
+			let loggedOutHighScore = localStorage.getItem('highScore')
+			if (loggedInHighScore > loggedOutHighScore) {
+				console.log('Highscore from database: ' + loggedInHighScore)
+				return loggedInHighScore
+			} else {
+				console.log('Highscore from localstorage: ' + loggedOutHighScore)
+				return loggedOutHighScore
+			}
 		},
 
 		loginAccount(loginDetails) {
@@ -94,11 +110,19 @@ export default {
 					if (data.users.length > 0) {
 						this.userInfo.loggedIn = true
 						this.userInfo.userName = data.users[0].userName
+
+						let highScore = this.compareHighScore(data.users[0].highScore)
+
 						this.saveUserDetailsLocalStorage(
 							data.users[0].userId,
 							data.users[0].userName,
-							data.users[0].highScore
+							highScore
 						)
+
+						if (highScore > data.users[0].highScore) {
+							this.postHighScore(highScore)
+						}
+
 						bus.$emit('login-status', this.userInfo)
 						this.$router.push('/')
 					} else {
@@ -114,6 +138,24 @@ export default {
 			localStorage.setItem('userId', userId)
 			localStorage.setItem('userName', userName)
 			localStorage.setItem('highScore', highScore)
+		},
+		postHighScore(highScore) {
+			let userId = localStorage.getItem('userId')
+			let getHighScore = {
+				userId: userId,
+				highScore: highScore,
+			}
+			fetch('http://localhost:3000/highScore', {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify(getHighScore),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data)
+				})
 		},
 	},
 }

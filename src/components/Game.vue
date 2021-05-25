@@ -100,6 +100,14 @@
 				<button class="button--play-again" v-on:click="resetRound">
 					Play again?
 				</button>
+
+				<button
+					v-if="!signedIn && this.challenge"
+					class="button--play-again"
+					v-on:click="redirectToRegister"
+				>
+					Log in an save your score?
+				</button>
 			</div>
 		</section>
 	</section>
@@ -197,7 +205,12 @@ export default {
 		},
 
 		calculateTotalScore() {
-			this.totalScore = this.correctAnswer * this.elapsedTime * 0.125
+			// let calculatedScore = (this.correctAnswer / this.elapsedTime) * 5434
+			// console.log('Calculatedscore: ' + calculatedScore)
+
+			let calculatedScore =
+				(this.correctAnswer * 10000) / (this.elapsedTime / 1000)
+			this.totalScore = calculatedScore.toFixed(0)
 		},
 
 		resetRound() {
@@ -216,11 +229,22 @@ export default {
 			return regions[Math.floor(Math.random() * regions.length + 1)]
 		},
 
+		checkIfLoggedIn() {
+			let loggedInUserId = localStorage.getItem('userId')
+			console.log(loggedInUserId)
+
+			if (loggedInUserId != null) {
+				console.log('User is logged in: ' + loggedInUserId)
+				this.signedIn = true
+			}
+		},
+
 		quitShowScore() {
 			this.questionCounter--
 			this.quitGame = true
 			this.stopTimer()
 			this.calculateTotalScore()
+			this.checkIfLoggedIn()
 
 			let currentHighScore = localStorage.getItem('highScore')
 			console.log('Old score' + currentHighScore)
@@ -325,6 +349,9 @@ export default {
 					console.log(data)
 				})
 		},
+		redirectToRegister() {
+			this.$router.push({ path: '/register' })
+		},
 	},
 	data() {
 		return {
@@ -344,6 +371,7 @@ export default {
 			elapsedTime: 0,
 			timer: undefined,
 			totalScore: 0,
+			signedIn: false,
 		}
 	},
 	computed: {
