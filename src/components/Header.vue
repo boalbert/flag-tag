@@ -2,22 +2,6 @@
 	<header>
 		<div>
 			<img class="logo" src="../img/logga.png" alt="logo" />
-
-			<router-link to="/" class="router-links">Home</router-link>
-			<router-link to="/profile" v-if="signedIn" class="router-links"
-				>👱🏻‍♀️ Profile</router-link
-			>
-			<router-link to="/register" v-else class="router-links">
-				Sign in</router-link
-			>
-			<button
-				class="dark-button"
-				@click="toggleTheme"
-				aria-label="Toggle themes"
-			>
-				<span v-if="this.theme === 'darkMode'"> Light</span>
-				<span v-else> Dark</span>
-			</button>
 		</div>
 
 		<router-link to="/" class="router-links"
@@ -29,6 +13,10 @@
 		<router-link to="/register" v-else class="router-links">
 			<i class="fas fa-sign-in-alt"> </i> SIGN IN<span></span>
 		</router-link>
+		<button class="dark-button" @click="toggleTheme" aria-label="Toggle themes">
+			<span v-if="this.theme === 'darkMode'"> Light</span>
+			<span v-else> Dark</span>
+		</button>
 	</header>
 </template>
 
