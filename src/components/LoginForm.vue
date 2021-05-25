@@ -1,12 +1,11 @@
 <template>
 	<div>
-		<h2>🔐</h2>
 		<h1>Sign In</h1>
 
 		<!-- Display errors in login-details -->
 		<div v-if="errors.length > 0">
 			<ul>
-				<li class="error-text listItem--error">
+				<li class="text--error text__red">
 					{{ errors }}
 				</li>
 			</ul>
@@ -31,7 +30,7 @@
 					name="password"
 					v-model.trim="loginDetails.password"
 				/>
-				<button type="submit" class="button_signup-login button--green">
+				<button type="submit" class="button_signup-login">
 					Log In
 				</button>
 			</div>
@@ -62,14 +61,65 @@ export default {
 }
 </script>
 
-<style>
-    h1{
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 30px;
-        color: #f7931e;
-    }
-    .button_signup-login {
-        font-family: Arial, sans-serif;
-        color: #3333ff;
-    }
+<style scoped>
+section {
+	height: 500px;
+}
+label {
+	padding: 10px 0;
+	text-align: left;
+	font-weight: bold;
+}
+input {
+	height: 35px;
+	border: 2px solid rgb(238, 237, 237);
+	border-radius: 0px;
+	border: 1px solid gray;
+	padding: 5px;
+	font-size: 18px;
+	box-shadow: 2px 2px;
+}
+
+input:focus {
+	outline: none;
+}
+.input__container {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	width: 15rem;
+}
+
+.icon-signup-login {
+	text-shadow: 1px 1px 1px #ccc;
+	font-size: 60px;
+	padding: 15px;
+}
+
+.button_signup-login {
+	margin-top: 20px;
+	width: 15rem;
+	height: 65px;
+	background-color: #f58442;
+	font-weight: bold;
+	font-family: 'Space Mono', monospace;
+	box-shadow: 2px 2px;
+	font-size: 20px;
+	border: none;
+	align-self: center;
+}
+.text--error {
+	font-size: 13px;
+	list-style: none;
+	text-align: center;
+}
+.text__red {
+	color: #aa001f;
+}
+
+@media screen and (min-width: 1050px) {
+	.input__container {
+		width: 15rem;
+	}
+}
 </style>

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<h1>Practice</h1>
 		<Game :challenge="false" />
 	</div>
 </template>

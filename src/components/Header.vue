@@ -1,14 +1,9 @@
 <template>
 	<header>
-		<div class="container-logo">
-			<img class="logo-img" src="../img/logga.png" alt="logo" />
-		</div>
-
-		<div class="motto">
-			<p>Use your swag to brag in FlagTag!</p>
-		</div>
-
 		<div>
+
+			<img class="logo" src="../img/logga.png" alt="logo" />
+
 			<router-link to="/" class="router-links">Home</router-link>
 			<router-link to="/profile" v-if="signedIn" class="router-links"
 				>👱🏻‍♀️ Profile</router-link
@@ -20,8 +15,17 @@
                 <span v-if="this.theme === 'darkMode'"> Light</span>
                 <span v-else> Dark</span>
             </button>
-			💡
 		</div>
+
+		<router-link to="/" class="router-links"
+			><i class="fas fa-home"> </i> HOME
+		</router-link>
+		<router-link to="/profile" v-if="signedIn" class="router-links"
+			><i class="fas fa-user-circle"></i> {{ userName }}</router-link
+		>
+		<router-link to="/register" v-else class="router-links">
+			<i class="fas fa-sign-in-alt"> </i> SIGN IN<span></span>
+		</router-link>
 	</header>
 </template>
 
@@ -34,14 +38,19 @@ export default {
 	data() {
 		return {
 			signedIn: false,
-            theme: '' //When this property is empty, the theme is set to the default theme i.e. light mode.
+			userName: String
+            theme: '', //When this property is empty, the theme is set to the default theme i.e. light mode.
 		}
 	},
 	created() {
 		// Listen for login-status emitted by sign out / sign in functions.
 		// Used for displaying profile link or register link
 		bus.$on('login-status', (data) => {
-			this.signedIn = data
+			this.signedIn = data.loggedIn
+			this.userName = data.userName
+		})
+		bus.$on('current-username', (data) => {
+			this.userName = data
 		})
 	},  mounted() {
         let localTheme = localStorage.getItem('theme'); //gets stored theme value if any
@@ -60,44 +69,55 @@ export default {
 </script>
 
 
-
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
 <style>
-header {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	height: 85px;
-	border-bottom: 2px solid lightgray;
-	margin-bottom: 50px;
-	margin: 0 0 100px 0;
-	align-items: center;
-	/* background-color: rgb(247, 247, 247); */
-}
 
-header > div {
-	/* border: 2px solid red; */
-}
-
-.container-logo {
-	justify-self: left;
-	padding: 0 0 0 25px;
-}
-
-.logo-img {
-	width: 130px;
+img {
+	width: 90px;
 	height: 100%;
-}
-.motto{
-  color: #125DB3;
 }
 
 .router-links {
-	text-decoration: underline;
-	font-family: Helvetica, sans-serif;
+	color: #1b4d7a;
+	text-decoration: none;
 	font-size: 18px;
-	color: black;
-	font-weight: bold;
 	padding: 20px;
+	font-family: 'Space Mono', monospace;
+	color: black;
 }
 
+.logo {
+	display: none;
+}
+header {
+	display: flex;
+	flex-direction: column;
+	height: 150px;
+	box-shadow: 7px 7px;
 
+	margin: 0 auto;
+	margin-bottom: 50px;
+	align-items: center;
+	background: linear-gradient(90deg, #125db3 35%, #f5b442 100%);
+}
+
+@media screen and (min-width: 1050px) {
+	header {
+		max-width: 1400px;
+		display: grid;
+		grid-template-columns: 1fr auto auto auto;
+		justify-content: space-around;
+		height: 100px;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	.logo {
+		justify-self: flex-start;
+		margin-left: 50px;
+		display: block;
+	}
+}
 </style>

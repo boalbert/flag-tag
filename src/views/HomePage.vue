@@ -1,5 +1,6 @@
 <template>
 	<section>
+		<About class="align-flexend" />
 		<SelectGameMode />
 		<ListHighScore />
 	</section>
@@ -8,10 +9,12 @@
 <script>
 import SelectGameMode from '@/components/SelectGameMode.vue'
 import ListHighScore from '@/components/ListHighScore.vue'
+import About from '@/components/About.vue'
 
 export default {
 	name: 'HomePage',
 	components: {
+		About,
 		SelectGameMode,
 		ListHighScore,
 	},
@@ -25,33 +28,18 @@ export default {
 section {
 	display: flex;
 	flex-direction: column;
-	width: 95%;
 	margin: 0 auto;
-	max-width: 1400px;
+	grid-column-start: 2;
+	gap: 20px;
 }
 
-@media screen and (min-width: 1050px) {
-	section {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		justify-items: stretch;
-	}
+.align-flexend {
+	/* 	Place about-box at the end in mobile view */
+	order: 2;
 }
 
 button:hover {
 	cursor: pointer;
-}
-
-.button__gameOptions {
-	background-color: #007bff;
-	text-transform: uppercase;
-	font-size: 25px;
-	width: 300px;
-	height: 100px;
-	border: 0;
-	margin: 25px 0 25px 0;
-	color: white;
-	border-radius: 5px;
 }
 
 .button__darkMode {
@@ -60,10 +48,16 @@ button:hover {
 	background-color: none;
 }
 
-.game-mode-container {
-	display: flex;
-	flex-direction: column;
-	grid-column-start: 2;
-	margin: 0 auto;
+@media screen and (min-width: 1050px) {
+	.align-flexend {
+		/* Place top-left in desktop view */
+		order: 0;
+	}
+	section {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		max-width: 1400px;
+		justify-items: stretch;
+	}
 }
 </style>
