@@ -74,7 +74,7 @@ export default {
 						this.saveUserDetailsLocalStorage(
 							data.users.userId,
 							data.users.username,
-							0
+							0,0,0,0,0,0
 						)
 
 						this.$router.push('/')
@@ -98,7 +98,12 @@ export default {
 						this.saveUserDetailsLocalStorage(
 							data.users[0].userId,
 							data.users[0].userName,
-							data.users[0].highScoreAllRegions
+							data.users[0].highScoreAllRegions,
+              data.users[0].highScoreAsia,
+              data.users[0].highScoreEurope,
+              data.users[0].highScoreAfrica,
+              data.users[0].highScoreAmericas,
+              data.users[0].highScoreOceania
 						)
 						bus.$emit('login-status', this.userInfo)
 						this.$router.push('/')
@@ -111,7 +116,14 @@ export default {
 				})
 		},
 
-		saveUserDetailsLocalStorage(userId, userName) {let highscoreObject = {AllRegions: 0, Asia: 0, Americas: 0, Africa: 0, Europe: 0, Oceania: 0 }
+		saveUserDetailsLocalStorage(userId, userName, allRegions, asia, europe, africa, americas, oceania) {
+		  let highscoreObject = {
+		    AllRegions: allRegions,
+        Asia: asia,
+        Americas: americas,
+        Africa: africa,
+        Europe: europe,
+        Oceania: oceania }
 			localStorage.setItem('userId', userId)
 			localStorage.setItem('userName', userName)
 			localStorage.setItem('highScore', JSON.stringify(highscoreObject))
