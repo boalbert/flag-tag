@@ -38,7 +38,7 @@ export default {
 	data() {
 		return {
 			signedIn: false,
-			userName: String
+			userName: String,
             theme: '', //When this property is empty, the theme is set to the default theme i.e. light mode.
 		}
 	},
