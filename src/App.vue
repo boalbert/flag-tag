@@ -16,7 +16,11 @@ export default {
 </script>
 
 <style>
+@import './css/main.css';
+
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans&display=swap');
+
+
 
 p {
 	font-size: 16px;
@@ -45,4 +49,7 @@ h2 {
 	margin: 0 auto;
 	background-color: #faf8f0;
 }
+
+
+
 </style>
