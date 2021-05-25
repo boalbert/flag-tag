@@ -1,7 +1,6 @@
 <template>
 	<header>
 		<div>
-
 			<img class="logo" src="../img/logga.png" alt="logo" />
 
 			<router-link to="/" class="router-links">Home</router-link>
@@ -11,10 +10,14 @@
 			<router-link to="/register" v-else class="router-links">
 				Sign in</router-link
 			>
-            <button class="dark-button"  @click="toggleTheme" aria-label="Toggle themes">
-                <span v-if="this.theme === 'darkMode'"> Light</span>
-                <span v-else> Dark</span>
-            </button>
+			<button
+				class="dark-button"
+				@click="toggleTheme"
+				aria-label="Toggle themes"
+			>
+				<span v-if="this.theme === 'darkMode'"> Light</span>
+				<span v-else> Dark</span>
+			</button>
 		</div>
 
 		<router-link to="/" class="router-links"
@@ -29,7 +32,6 @@
 	</header>
 </template>
 
-
 <script>
 import { bus } from '../main'
 
@@ -39,7 +41,7 @@ export default {
 		return {
 			signedIn: false,
 			userName: String,
-            theme: '', //When this property is empty, the theme is set to the default theme i.e. light mode.
+			theme: '', //When this property is empty, the theme is set to the default theme i.e. light mode.
 		}
 	},
 	created() {
@@ -52,28 +54,27 @@ export default {
 		bus.$on('current-username', (data) => {
 			this.userName = data
 		})
-	},  mounted() {
-        let localTheme = localStorage.getItem('theme'); //gets stored theme value if any
-        document.documentElement.setAttribute('data-theme', localTheme); // updates the data-theme attribute
-    },
+	},
+	mounted() {
+		let localTheme = localStorage.getItem('theme') //gets stored theme value if any
+		document.documentElement.setAttribute('data-theme', localTheme) // updates the data-theme attribute
+	},
 
-    methods:{toggleTheme() {
-            this.theme = this.theme === 'darkMode' ? '' : 'darkMode'; //toggles theme value
-            document.documentElement.setAttribute('data-theme', this.theme); // updates the data-theme attribute
-            localStorage.setItem('theme', this.theme); // stores theme value in local storage
-            console.log("button press")
-
-
-        }}
+	methods: {
+		toggleTheme() {
+			this.theme = this.theme === 'darkMode' ? '' : 'darkMode' //toggles theme value
+			document.documentElement.setAttribute('data-theme', this.theme) // updates the data-theme attribute
+			localStorage.setItem('theme', this.theme) // stores theme value in local storage
+			console.log('button press')
+		},
+	},
 }
 </script>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
-<style>
 
 img {
 	width: 90px;
