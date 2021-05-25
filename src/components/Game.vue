@@ -228,9 +228,10 @@ export default {
 			console.log('New score' + newHighScore)
 
 			if (
-				this.challenge &&
-				this.selectedRegion === '' &&
-				currentHighScore < newHighScore
+				(this.challenge &&
+					this.selectedRegion === '' &&
+					currentHighScore < newHighScore) ||
+				currentHighScore === null
 			) {
 				localStorage.setItem('highScore', newHighScore)
 				this.postHighScore(this.totalScore)
