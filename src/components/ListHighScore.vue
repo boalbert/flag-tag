@@ -16,8 +16,10 @@
 <script>
 export default {
 	name: 'ListHighScore',
-	props: {
-		highscore: Array,
+  data() {
+    return {
+      highscore: Array,
+    }
 	},
 	methods: {
 		getHighscore() {
