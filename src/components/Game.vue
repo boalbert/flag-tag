@@ -364,7 +364,7 @@ h2,
 h3 {
 	font-family: 'Space Mono', monospace;
 	letter-spacing: 2px;
-	color: black;
+
 }
 
 .game-container {
@@ -431,8 +431,7 @@ h3 {
 	margin: 0 auto;
 	box-shadow: 7px 7px;
 	border: 2px solid black;
-	background-color: white;
-	padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 header {
@@ -452,7 +451,7 @@ header {
 	font-family: 'Space Mono', monospace;
 	letter-spacing: 2px;
 	font-size: 30px;
-	color: black;
+
 	margin: 0;
 	padding: 15px;
 }
@@ -483,7 +482,7 @@ header {
 	width: 95%;
 	max-width: 500px;
 	border: 2px solid black;
-	background-color: rgb(240, 240, 240);
+
 }
 
 .box-suggestion {

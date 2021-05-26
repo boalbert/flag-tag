@@ -143,7 +143,7 @@ export default {
 	flex-direction: column;
 	margin: 0 auto;
 	box-shadow: 7px 7px;
-	background-color: white;
+
 	border: 2px solid black;
 	padding: 15px;
 }
