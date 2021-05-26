@@ -76,7 +76,7 @@ export default {
 						this.saveUserDetailsLocalStorage(
 							data.users.userId,
 							data.users.username,
-							highScore
+							0,0,0,0,0,0
 						)
 
 						this.postHighScore(highScore)
@@ -116,7 +116,12 @@ export default {
 						this.saveUserDetailsLocalStorage(
 							data.users[0].userId,
 							data.users[0].userName,
-							highScore
+							data.users[0].highScoreAllRegions,
+              data.users[0].highScoreAsia,
+              data.users[0].highScoreEurope,
+              data.users[0].highScoreAfrica,
+              data.users[0].highScoreAmericas,
+              data.users[0].highScoreOceania
 						)
 
 						if (highScore > data.users[0].highScore) {
@@ -134,10 +139,20 @@ export default {
 				})
 		},
 
-		saveUserDetailsLocalStorage(userId, userName, highScore) {
+		saveUserDetailsLocalStorage(userId, userName, allRegions, asia, europe, africa, americas, oceania) {
+		  let highscoreObject = {
+		    AllRegions: allRegions,
+        Asia: asia,
+        Americas: americas,
+        Africa: africa,
+        Europe: europe,
+        Oceania: oceania }
 			localStorage.setItem('userId', userId)
 			localStorage.setItem('userName', userName)
-			localStorage.setItem('highScore', highScore)
+			localStorage.setItem('highScore', JSON.stringify(highscoreObject))
+      var string = localStorage.getItem("highScore")
+      var retstring = JSON.parse(string)
+      console.log(retstring)
 		},
 		postHighScore(highScore) {
 			let userId = localStorage.getItem('userId')

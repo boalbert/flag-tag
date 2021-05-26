@@ -7,7 +7,7 @@
 		</div>
 		<ol>
 			<li v-for="(score, index) in highscore" v-bind:key="index">
-				{{ score.userName }} - {{ score.highScore }}
+				{{ score.userName }} - {{ score.highScoreAllRegions }}
 			</li>
 		</ol>
 	</div>
@@ -16,8 +16,10 @@
 <script>
 export default {
 	name: 'ListHighScore',
-	props: {
-		highscore: Array,
+  data() {
+    return {
+      highscore: Array,
+    }
 	},
 	methods: {
 		getHighscore() {
@@ -40,11 +42,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 h2 {
 	font-family: 'Space Mono', monospace;
-	color: black;
-	font-weight: bold;
+    font-weight: bold;
 	letter-spacing: 5px;
 }
 .highscore-header {
@@ -62,7 +63,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	width: 300px;
-	background-color: white;
+
 }
 ol {
 	font-family: 'Space Mono', monospace;

@@ -3,40 +3,35 @@
 		<div class="select-game-region" v-if="!gameStarted">
 			<button
 				class="start-button button__all-countries"
-				v-on:click="startGame('')"
+				v-on:click="startGame('AllRegions')"
 			>
 				All Regions
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Europe')"
 			>
 				Europe
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Americas')"
 			>
 				Americas
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Asia')"
 			>
 				Asia
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Africa')"
 			>
 				Africa
 			</button>
 			<button
-				v-if="!challenge"
 				class="start-button"
 				v-on:click="startGame('Oceania')"
 			>
@@ -223,7 +218,7 @@ export default {
 		},
 
 		randomRegion() {
-			let regions = ['Europe', 'Americas', 'Asia', 'Africa', 'Oceania', '']
+			let regions = ['Europe', 'Americas', 'Asia', 'Africa', 'Oceania', 'AllRegions']
 			console.log(Math.floor(Math.random() * 5))
 
 			return regions[Math.floor(Math.random() * regions.length + 1)]
@@ -246,18 +241,18 @@ export default {
 			this.calculateTotalScore()
 			this.checkIfLoggedIn()
 
-			let currentHighScore = localStorage.getItem('highScore')
-			console.log('Old score' + currentHighScore)
+			// let currentHighScore = localStorage.getItem('highScore')
+			// console.log('Old score' + currentHighScore)
 			let newHighScore = this.totalScore
 			console.log('New score' + newHighScore)
+      let highscores = JSON.parse(localStorage.getItem("highScore"))
 
-			if (
-				(this.challenge &&
-					this.selectedRegion === '' &&
-					currentHighScore < newHighScore) ||
-				currentHighScore === null
-			) {
-				localStorage.setItem('highScore', newHighScore)
+      console.log(highscores[this.selectedRegion])
+
+			if (this.challenge && highscores[this.selectedRegion] < newHighScore ){
+        highscores[this.selectedRegion] = newHighScore
+
+				localStorage.setItem('highScore',JSON.stringify(highscores))
 				this.postHighScore(this.totalScore)
 			}
 		},
@@ -269,7 +264,7 @@ export default {
 			this.alternatives = []
 			let country
 
-			if (region === '') {
+			if (region === 'AllRegions') {
 				country = await this.createQuestion()
 			} else {
 				country = await this.createRegionQuestion(region)
@@ -279,7 +274,7 @@ export default {
 			this.countryFlag = country.flag
 			this.alternatives.push(country.name)
 
-			if (region === '') {
+			if (region === 'AllRegions') {
 				while (this.alternatives.length < 4) {
 					let index = Math.floor(
 						Math.random() * this.countryListOriginal.length
@@ -336,6 +331,7 @@ export default {
 			let getHighScore = {
 				userId: userId,
 				highScore: highScore,
+				region: this.selectedRegion
 			}
 			fetch('http://localhost:3000/highScore', {
 				method: 'POST',
@@ -359,7 +355,7 @@ export default {
 			countryListOriginal: [],
 			regionList: [],
 			countryListSplice: [],
-			selectedRegion: '',
+			selectedRegion: 'AllRegions',
 			countryName: '',
 			countryFlag: '',
 			alternatives: [],
@@ -396,7 +392,7 @@ h2,
 h3 {
 	font-family: 'Space Mono', monospace;
 	letter-spacing: 2px;
-	color: black;
+
 }
 
 .game-container {
@@ -463,8 +459,7 @@ h3 {
 	margin: 0 auto;
 	box-shadow: 7px 7px;
 	border: 2px solid black;
-	background-color: white;
-	padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 header {
@@ -484,7 +479,7 @@ header {
 	font-family: 'Space Mono', monospace;
 	letter-spacing: 2px;
 	font-size: 30px;
-	color: black;
+
 	margin: 0;
 	padding: 15px;
 }
@@ -515,7 +510,7 @@ header {
 	width: 95%;
 	max-width: 500px;
 	border: 2px solid black;
-	background-color: rgb(240, 240, 240);
+
 }
 
 .box-suggestion {

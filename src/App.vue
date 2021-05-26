@@ -44,10 +44,11 @@ h2 {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: black;
-	max-width: 1400px;
+    max-width: 1400px;
 	margin: 0 auto;
-	background-color: #faf8f0;
+
+
+
 }
 
 

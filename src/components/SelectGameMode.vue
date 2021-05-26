@@ -75,7 +75,7 @@ p {
 	display: flex;
 	flex-direction: column;
 	box-shadow: 7px 7px;
-	background-color: white;
+
 	border: 2px solid black;
 	margin-bottom: 20px;
 }
@@ -97,7 +97,7 @@ p {
 
 	font-family: 'Space Mono', monospace;
 	font-size: 23px;
-	color: black;
+
 	text-align: center;
 	letter-spacing: 8px;
 	font-weight: bolder;
