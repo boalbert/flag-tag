@@ -217,14 +217,19 @@ export default {
 			this.stopTimer()
 			this.calculateTotalScore()
 
-			let currentHighScore = localStorage.getItem('highScore')
-			console.log('Old score' + currentHighScore)
+			// let currentHighScore = localStorage.getItem('highScore')
+			// console.log('Old score' + currentHighScore)
 			let newHighScore = this.totalScore
 			console.log('New score' + newHighScore)
+      let highscores = JSON.parse(localStorage.getItem("highScore"))
+      // let jsonHighscores = JSON.parse(highscores)
+      console.log(highscores)
+      console.log(this.selectedRegion)
+      console.log(highscores.AllRegions)
 
 			if (this.challenge){
 					
-				localStorage.setItem('highScore', newHighScore)
+				//localStorage.setItem('highScore', newHighScore)
 				this.postHighScore(this.totalScore)
 			}
 		},
