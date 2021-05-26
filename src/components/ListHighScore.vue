@@ -7,7 +7,7 @@
 		</div>
 		<ol>
 			<li v-for="(score, index) in highscore" v-bind:key="index">
-				{{ score.userName }} - {{ score.highScore }}
+				{{ score.userName }} - {{ score.highScoreAllRegions }}
 			</li>
 		</ol>
 	</div>
