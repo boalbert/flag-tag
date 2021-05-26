@@ -244,12 +244,18 @@ export default {
 			// let currentHighScore = localStorage.getItem('highScore')
 			// console.log('Old score' + currentHighScore)
 			let newHighScore = this.totalScore
-			console.log('New score' + newHighScore)
+			console.log('New score: ' + newHighScore)
       let highscores = JSON.parse(localStorage.getItem("highScore"))
+      if (highscores === null){
+        highscores = {
+          [this.selectedRegion]: newHighScore
+        }
+        localStorage.setItem('highScore', JSON.stringify(highscores))
+      }
+      console.log('If highscores = null, create new highscore object:')
+      console.log(highscores)
+			if (this.challenge && highscores[this.selectedRegion] < newHighScore){
 
-      console.log(highscores[this.selectedRegion])
-
-			if (this.challenge && highscores[this.selectedRegion] < newHighScore ){
         highscores[this.selectedRegion] = newHighScore
 
 				localStorage.setItem('highScore',JSON.stringify(highscores))

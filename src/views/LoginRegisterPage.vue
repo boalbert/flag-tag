@@ -140,8 +140,8 @@ export default {
 		},
 
 		saveUserDetailsLocalStorage(userId, userName, allRegions, asia, europe, africa, americas, oceania) {
-		  let highscoreObject = {
-		    AllRegions: allRegions,
+      let highscoreObject = {
+        AllRegions: allRegions,
         Asia: asia,
         Americas: americas,
         Africa: africa,
@@ -159,6 +159,7 @@ export default {
 			let getHighScore = {
 				userId: userId,
 				highScore: highScore,
+        region: this.selectedRegion
 			}
 			fetch('http://localhost:3000/highScore', {
 				method: 'POST',
