@@ -1,18 +1,140 @@
 :root{
     /* Colors for default theme (light-mode) */
-    background-color: #faf8f0;
-    -webkit-text-fill-color:black;
-    transition: background 0.5s ease-in-out;
+    --background-color: white;
+    --text-color:black;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.about-container{
+    /* Colors for default theme (light-mode) */
+
+    background:#faf8f0;
+    --text-color:black;
+    transition: background-color 0.5s ease-in-out;
+}
+.card-body{
+    background:#faf8f0;
+    --text-color:black;
+    transition: background-color 0.5s ease-in-out;
+
+}
+.highscore-container{
+    background:#faf8f0;
+    --text-color:black;
+    transition: background-color 0.5s ease-in-out;
+
+}
+.login-registerpage-container{
+    background:#faf8f0;
+    --text-color:black;
+    transition: background-color 0.5s ease-in-out;
+
+}
+.card{
+    background:#faf8f0;
+    --text-color:black;
+    transition: background-color 0.5s ease-in-out;
+
+}
+.game-mode-container{
+
+
+    background:white;
+    --text-color:#1b4d7a;
+    transition: background-color 0.5s ease-in-out;
+}
+.game-container{
+
+
+    background:#faf8f0;
+    --text-color:#1b4d7a;
+    transition: background-color 0.5s ease-in-out;
+}
+.dark-button{
+    -webkit-text-fill-color: #f0c273;
 }
 
 [data-theme="darkMode"] {
     /* Colors for dark mode */
-    background-color: dimgrey;
-    -webkit-text-fill-color: white;
-    transition: background 0.5s ease-in-out;
+    --background-color: #313639;
 
+    transition: background-color 0.5s ease-in-out;
 
 }
+[data-theme="darkMode"] p{
+    -webkit-text-fill-color: #faf8f0;
+}
+[data-theme="darkMode"] ul{
+    -webkit-text-fill-color: #faf8f0;
+}
+[data-theme="darkMode"] li{
+    -webkit-text-fill-color: #faf8f0;
+}
+[data-theme="darkMode"] h3{
+    -webkit-text-fill-color: #faf8f0;
+}
+[data-theme="darkMode"] .about-container{
+
+
+    background: #464749;
+    --text-color:#faf8f0;
+    transition: background-color 0.5s ease-in-out;
+}
+[data-theme="darkMode"] .game-mode-container{
+
+
+    background:#313639;
+    --text-color:#faf8f0;
+    transition: background-color 0.5s ease-in-out;
+}
+[data-theme="darkMode"] .game-container{
+
+
+    background: #464749;
+    --text-color:#faf8f0;
+    transition: background-color 0.5s ease-in-out;
+}
+[data-theme="darkMode"] .highscore-container {
+
+
+    background: #464749;
+    --text-color:#faf8f0;
+    transition: background-color 0.5s ease-in-out;
+}
+[data-theme="darkMode"] .card-body{
+    background: #464749;
+    --text-color:#1b4d7a;
+    transition: background-color 0.5s ease-in-out;
+
+}
+
+[data-theme="darkMode"] .card{
+    background: #313639;
+    --text-color:#1b4d7a;
+    transition: background-color 0.5s ease-in-out;
+
+}
+[data-theme="darkMode"] .login-registerpage-container{
+    background:#464749;
+    --text-color:#1b4d7a;
+    transition: background-color 0.5s ease-in-out;
+
+}
+[data-theme="darkMode"] .card-left-container{
+    filter: grayscale(100%);
+    transition: filter 0.5s ease-in-out;
+
+}
+
+
+html {
+    background: var(--background-color);
+    -webkit-text-fill-color: var(--text-color);
+}
+
+
+
+
 
 .dark-button {
     background-color: #125db3;

@@ -40,11 +40,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 h2 {
 	font-family: 'Space Mono', monospace;
-	color: black;
-	font-weight: bold;
+    font-weight: bold;
 	letter-spacing: 5px;
 }
 .highscore-header {
