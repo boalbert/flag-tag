@@ -82,10 +82,11 @@ export default {
 							0
 						)
 
-						this.postHighScore(
-							localStorage.getItem('tempHighscore'),
-							localStorage.getItem('tempRegion')
-						)
+						if (this.localStorage.getItem('tempRegion') != null)
+							this.postHighScore(
+								localStorage.getItem('tempHighscore'),
+								localStorage.getItem('tempRegion')
+							)
 
 						this.$router.push('/')
 					}
