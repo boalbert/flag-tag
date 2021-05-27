@@ -7,34 +7,19 @@
 			>
 				All Regions
 			</button>
-			<button
-				class="start-button"
-				v-on:click="startGame('Europe')"
-			>
+			<button class="start-button" v-on:click="startGame('Europe')">
 				Europe
 			</button>
-			<button
-				class="start-button"
-				v-on:click="startGame('Americas')"
-			>
+			<button class="start-button" v-on:click="startGame('Americas')">
 				Americas
 			</button>
-			<button
-				class="start-button"
-				v-on:click="startGame('Asia')"
-			>
+			<button class="start-button" v-on:click="startGame('Asia')">
 				Asia
 			</button>
-			<button
-				class="start-button"
-				v-on:click="startGame('Africa')"
-			>
+			<button class="start-button" v-on:click="startGame('Africa')">
 				Africa
 			</button>
-			<button
-				class="start-button"
-				v-on:click="startGame('Oceania')"
-			>
+			<button class="start-button" v-on:click="startGame('Oceania')">
 				Oceania
 			</button>
 			<button
@@ -94,6 +79,14 @@
 
 				<button class="button--play-again" v-on:click="resetRound">
 					Play again?
+				</button>
+
+				<button
+					v-if="!signedIn && this.challenge"
+					class="button--play-again"
+					v-on:click="redirectToRegister"
+				>
+					Log in and save your score?
 				</button>
 			</div>
 		</section>
@@ -192,7 +185,9 @@ export default {
 		},
 
 		calculateTotalScore() {
-			this.totalScore = this.correctAnswer * this.elapsedTime * 0.125
+			let calculatedScore =
+				(this.correctAnswer * 10000) / (this.elapsedTime / 1000)
+			this.totalScore = calculatedScore.toFixed(0)
 		},
 
 		resetRound() {
@@ -205,10 +200,27 @@ export default {
 		},
 
 		randomRegion() {
-			let regions = ['Europe', 'Americas', 'Asia', 'Africa', 'Oceania', 'AllRegions']
+			let regions = [
+				'Europe',
+				'Americas',
+				'Asia',
+				'Africa',
+				'Oceania',
+				'AllRegions',
+			]
 			console.log(Math.floor(Math.random() * 5))
 
 			return regions[Math.floor(Math.random() * regions.length + 1)]
+		},
+
+		checkIfLoggedIn() {
+			let loggedInUserId = localStorage.getItem('userId')
+			console.log(loggedInUserId)
+
+			if (loggedInUserId != null) {
+				console.log('User is logged in: ' + loggedInUserId)
+				this.signedIn = true
+			}
 		},
 
 		quitShowScore() {
@@ -216,20 +228,31 @@ export default {
 			this.quitGame = true
 			this.stopTimer()
 			this.calculateTotalScore()
+			this.checkIfLoggedIn()
 
-			// let currentHighScore = localStorage.getItem('highScore')
-			// console.log('Old score' + currentHighScore)
-			let newHighScore = this.totalScore
-			console.log('New score' + newHighScore)
-      let highscores = JSON.parse(localStorage.getItem("highScore"))
+			// If user is not logged in
+			// Save highscore and region as temp variables in localstorage
+			if (!this.signedIn) {
+				localStorage.setItem('tempHighscore', this.totalScore)
+				localStorage.setItem('tempRegion', this.selectedRegion)
 
-      console.log(highscores[this.selectedRegion])
+				// If user is logged in
+				// Compare new score with old scored from localstorage
+			} else {
+				// New score
+				let newHighScore = this.totalScore
 
-			if (this.challenge && highscores[this.selectedRegion] < newHighScore ){
-        highscores[this.selectedRegion] = newHighScore
+				// Old score from localstorage
+				let highscores = JSON.parse(localStorage.getItem('highScore'))
 
-				localStorage.setItem('highScore',JSON.stringify(highscores))
-				this.postHighScore(this.totalScore)
+				// If in challange-mode AND new highscore is better than old highscore
+				// POST to database
+				if (this.challenge && highscores[this.selectedRegion] < newHighScore) {
+					highscores[this.selectedRegion] = newHighScore
+
+					localStorage.setItem('highScore', JSON.stringify(highscores))
+					this.postHighScore(this.totalScore)
+				}
 			}
 		},
 		async displayQuestion(region) {
@@ -307,7 +330,7 @@ export default {
 			let getHighScore = {
 				userId: userId,
 				highScore: highScore,
-				region: this.selectedRegion
+				region: this.selectedRegion,
 			}
 			fetch('http://localhost:3000/highScore', {
 				method: 'POST',
@@ -320,6 +343,9 @@ export default {
 				.then((data) => {
 					console.log(data)
 				})
+		},
+		redirectToRegister() {
+			this.$router.push({ path: '/register' })
 		},
 	},
 	data() {
@@ -340,6 +366,7 @@ export default {
 			elapsedTime: 0,
 			timer: undefined,
 			totalScore: 0,
+			signedIn: false,
 		}
 	},
 	computed: {
@@ -364,7 +391,6 @@ h2,
 h3 {
 	font-family: 'Space Mono', monospace;
 	letter-spacing: 2px;
-
 }
 
 .game-container {
@@ -431,7 +457,7 @@ h3 {
 	margin: 0 auto;
 	box-shadow: 7px 7px;
 	border: 2px solid black;
-    padding-bottom: 20px;
+	padding-bottom: 20px;
 }
 
 header {
@@ -482,7 +508,6 @@ header {
 	width: 95%;
 	max-width: 500px;
 	border: 2px solid black;
-
 }
 
 .box-suggestion {
@@ -493,6 +518,15 @@ header {
 ul {
 	padding: 0;
 	margin: 0;
+}
+
+.results {
+	display: flex;
+	flex-direction: column;
+}
+
+.results button {
+	align-self: center;
 }
 
 li {
@@ -531,7 +565,7 @@ li {
 .button--play-again {
 	font-size: 18px;
 	cursor: pointer;
-	width: 180px;
+	width: 190px;
 	height: 65px;
 	background-color: #328bf1;
 	font-weight: bold;
