@@ -20,6 +20,8 @@ export default {
 			localStorage.removeItem('userId')
 			localStorage.removeItem('userName')
 			localStorage.removeItem('highScore')
+			localStorage.removeItem('tempHighscore')
+			localStorage.removeItem('tempRegion')
 
 			// Send user back to homepage
 			this.$router.push('/')

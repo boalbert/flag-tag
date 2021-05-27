@@ -39,7 +39,7 @@
 			</header>
 			<main v-if="!quitGame">
 				<div class="box-flag">
-					<p class="timer">
+					<p class="timer" v-if="challenge">
 						<i class="far fa-clock"></i> {{ formattedElapsedTime }}
 					</p>
 					<img class="img-flag" v-bind:src="this.countryFlag" />
@@ -65,16 +65,39 @@
 
 				<article class="results-stats-box">
 					<!-- v-if newScore > highScore  -->
-					<div>
-						<h2>Wow!</h2>
-						<h3>You beat your last highscore!</h3>
+					<div v-if="challenge">
+						<div v-if="showGoodJobPromt">
+							<h2>Wow! New highscore!</h2>
+							<p>
+								Great job! This was your best one yet! Keep going and you'll get
+								even better!
+							</p>
+						</div>
+
+						<div v-if="!showGoodJobPromt">
+							<h2>Aww... Try again!</h2>
+							<p>You did not beat your old highscore.</p>
+						</div>
+
+						<!-- <h3>You beat your last highscore!</h3> -->
+					</div>
+
+					<div v-else>
+						<h2 v-if="this.correctAnswer / this.questionCounter > 0.5">
+							Good job! You're on the right track!
+						</h2>
+						<h2 v-else>Keep practicing!</h2>
+						<p>
+							Maybe one day you'll get a place on the highscore list? Start a
+							challenge round when you feel ready.
+						</p>
 					</div>
 
 					<p><b>Answered questions:</b> {{ questionCounter }}</p>
 					<p><b>Correct answers:</b> {{ correctAnswer }}</p>
-					<p><b>Time:</b> {{ formattedElapsedTime }} min(s)</p>
+					<p v-if="challenge"><b>Time:</b> {{ formattedElapsedTime }} min(s)</p>
 
-					<p><b>Total score:</b> {{ totalScore }}p</p>
+					<p v-if="challenge"><b>Total score:</b> {{ totalScore }}p</p>
 				</article>
 
 				<button class="button--play-again" v-on:click="resetRound">
@@ -197,6 +220,7 @@ export default {
 			this.questionCounter = 0
 			this.gameStarted = false
 			this.quitGame = false
+			this.showGoodJobPromt = false
 		},
 
 		randomRegion() {
@@ -241,15 +265,13 @@ export default {
 			} else {
 				// New score
 				let newHighScore = this.totalScore
-
 				// Old score from localstorage
 				let highscores = JSON.parse(localStorage.getItem('highScore'))
-
 				// If in challange-mode AND new highscore is better than old highscore
 				// POST to database
 				if (this.challenge && highscores[this.selectedRegion] < newHighScore) {
+					this.showGoodJobPromt = true
 					highscores[this.selectedRegion] = newHighScore
-
 					localStorage.setItem('highScore', JSON.stringify(highscores))
 					this.postHighScore(this.totalScore)
 				}
@@ -367,6 +389,7 @@ export default {
 			timer: undefined,
 			totalScore: 0,
 			signedIn: false,
+			showGoodJobPromt: false,
 		}
 	},
 	computed: {
