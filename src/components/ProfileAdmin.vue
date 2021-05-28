@@ -12,7 +12,7 @@
   <div class="resetOneHighscore">
   <button @click="resetOneCheck" class="menu-button">Reset one players highscore</button>
   <div v-if="resetOne" class="resetOne-form">
-    <p v-if="resetOneSuccess">{{message2}}</p>
+    <p v-if="resetOneSuccess">{{messageReset}}</p>
     <form @submit.prevent="resetOneAccount(userNameToReset)">
       <input
           required
@@ -29,7 +29,7 @@
   <div class="deleteOneAccount">
   <button @click="deleteAccountCheck" class="menu-button">Delete an account</button>
   <div v-if="deleteClick" class="deleteAccount-form">
-    <p v-if="deleteSuccess">{{message}}</p>
+    <p v-if="deleteSuccess">{{messageDelete}}</p>
     <form @submit.prevent="deleteAccount(userNameToDelete)">
       <input
           required
@@ -60,8 +60,8 @@ name: "ProfileAdmin",
       resetOne: false,
       userNameToDelete: '',
       userNameToReset: '',
-      message: '',
-      message2: '',
+      messageDelete: '',
+      messageReset: '',
     }
   },
 
@@ -104,7 +104,7 @@ name: "ProfileAdmin",
       })
           .then((response) => response.json())
           .then((data) => {
-              this.message = data.msg
+              this.messageDelete = data.msg
               this.userNameToDelete = ''
               this.deleteSuccess = true
           })
@@ -119,7 +119,7 @@ name: "ProfileAdmin",
       })
           .then((response) => response.json())
           .then((data) => {
-            this.message2 = data.msg
+            this.messageReset = data.msg
             this.userNameToReset = ''
             this.resetOneSuccess = true
           })
