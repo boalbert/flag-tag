@@ -12,7 +12,7 @@
   <div class="resetOneHighscore">
   <button @click="resetOneCheck" class="menu-button">Reset one players highscore</button>
   <div v-if="resetOne" class="resetOne-form">
-    <p v-if="resetOneSuccess">Reset succesful</p>
+    <p v-if="resetOneSuccess">{{message2}}</p>
     <form @submit.prevent="resetOneAccount(userNameToReset)">
       <input
           required
@@ -29,7 +29,7 @@
   <div class="deleteOneAccount">
   <button @click="deleteAccountCheck" class="menu-button">Delete an account</button>
   <div v-if="deleteClick" class="deleteAccount-form">
-    <p v-if="deleteSuccess">Account deleted</p>
+    <p v-if="deleteSuccess">{{message}}</p>
     <form @submit.prevent="deleteAccount(userNameToDelete)">
       <input
           required
@@ -59,7 +59,9 @@ name: "ProfileAdmin",
       deleteClick: false,
       resetOne: false,
       userNameToDelete: '',
-      userNameToReset: ''
+      userNameToReset: '',
+      message: '',
+      message2: '',
     }
   },
 
@@ -96,32 +98,30 @@ name: "ProfileAdmin",
       fetch(
           `http://localhost:3000/users/${usernameToDelete}`, {
         method: 'DELETE',
+            headers: {
+              'Content-type': 'application/json',
+            },
       })
           .then((response) => response.json())
           .then((data) => {
-            if (!data.success) {
-              console.log(data.errors)
-            } else if (data.success) {
-              console.log("Account deleted")
+              this.message = data.msg
               this.userNameToDelete = ''
               this.deleteSuccess = true
-            }
           })
     },
     resetOneAccount(usernameToReset){
       fetch(`http://localhost:3000/highscore/${usernameToReset}`, {
         method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+        },
 
       })
           .then((response) => response.json())
           .then((data) => {
-            if (!data.success) {
-              console.log(data.errors)
-            } else if (data.success) {
-              console.log("Reset successful")
-              this.userNameToReset = ''
-              this.resetOneSuccess = true
-            }
+            this.message2 = data.msg
+            this.userNameToReset = ''
+            this.resetOneSuccess = true
           })
     },
   }
