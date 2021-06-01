@@ -46,11 +46,15 @@
 				</div>
 				<div class="box-suggestion">
 					<ul v-for="(alternative, index) in alternatives" v-bind:key="index">
-						<li
-							:class="answerClass(alternative)"
-							v-on:click="checkAnswer(alternative)"
-						>
-							{{ alternative }}
+						<li>
+              <button
+                  :class="answerClass(alternative)"
+                  v-on:click="checkAnswer(alternative)"
+                  :disabled="disabled"
+              >
+              {{ alternative }}
+            </button>
+
 						</li>
 					</ul>
 				</div>
@@ -255,7 +259,7 @@ export default {
 				}
 			}
 		},
-		async displayQuestion(region) {
+		async displayQuestion(region) {this.disabled = false
 			this.answered = false
 			this.questionCounter++
 			this.gameStarted = true
@@ -298,7 +302,7 @@ export default {
 				this.quitShowScore()
 			}
 		},
-		checkAnswer(alternative) {
+		checkAnswer(alternative) {this.disabled = true
 			console.log(alternative)
 			this.answered = true
 
@@ -367,6 +371,7 @@ export default {
 			timer: undefined,
 			totalScore: 0,
 			signedIn: false,
+      disabled: false
 		}
 	},
 	computed: {
