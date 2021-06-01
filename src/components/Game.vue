@@ -49,14 +49,14 @@
 				<div class="box-suggestion">
 					<ul v-for="(alternative, index) in alternatives" v-bind:key="index">
 						<li>
-              <button
-                  :class="answerClass(alternative)"
-                  v-on:click="checkAnswer(alternative)"
-                  :disabled="disabled"
-              >
-              {{ alternative }}
-            </button>
-
+							<button
+								class="button--alternative"
+								:class="answerClass(alternative)"
+								v-on:click="checkAnswer(alternative)"
+								:disabled="disabled"
+							>
+								{{ alternative }}
+							</button>
 						</li>
 					</ul>
 				</div>
@@ -312,7 +312,8 @@ export default {
 				}
 			}
 		},
-		async displayQuestion(region) {this.disabled = false
+		async displayQuestion(region) {
+			this.disabled = false
 			this.answered = false
 			this.questionCounter++
 			this.gameStarted = true
@@ -355,7 +356,8 @@ export default {
 				this.quitShowScore()
 			}
 		},
-		checkAnswer(alternative) {this.disabled = true
+		checkAnswer(alternative) {
+			this.disabled = true
 			console.log(alternative)
 			this.answered = true
 
@@ -425,7 +427,7 @@ export default {
 			totalScore: 0,
 			signedIn: false,
 			showGoodJobPromt: false, // True if player beats her old highscore
-      disabled: false,
+			disabled: false,
 		}
 	},
 	computed: {
@@ -521,7 +523,6 @@ h3 {
 
 header {
 	background-color: #f5b442;
-	/* height: 200px; */
 	width: 100%;
 	border-bottom: 3px solid black;
 }
@@ -550,13 +551,6 @@ header {
 	font-weight: bold;
 }
 
-.correct {
-	background-color: green;
-}
-
-.incorrect {
-	background-color: red;
-}
 .box-flag {
 	justify-content: center;
 	margin-bottom: 15px;
@@ -589,22 +583,37 @@ ul {
 }
 
 li {
+	list-style: none;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.button--alternative {
 	color: black;
 	cursor: pointer;
-	list-style: none;
-	height: 65px;
+
+	height: 75px;
 	background-color: #f58442;
 	font-weight: bold;
 	font-family: 'Space Mono', monospace;
-	margin: 0 auto;
+
 	margin-top: 5px;
 	margin-bottom: 5px;
 	box-shadow: 2px 2px;
 	font-size: 16px;
 	overflow: hidden;
 	overflow-wrap: break-word;
-	width: 150px;
+	width: 220px;
 	text-align: center;
+	border: none;
+}
+
+.correct {
+	background-color: green;
+}
+
+.incorrect {
+	background-color: red;
 }
 
 .button--quit {
@@ -651,12 +660,6 @@ li {
 	h3 {
 		font-size: 19px;
 	}
-	li {
-		width: 190px;
-		height: 80px;
-		font-size: 17px;
-		padding: 2px;
-	}
 
 	.select-game-region {
 		display: grid;
@@ -667,6 +670,32 @@ li {
 		grid-template-columns: 1fr 1fr;
 	}
 
+	li {
+		list-style: none;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	.button--alternative {
+		color: black;
+		cursor: pointer;
+
+		height: 75px;
+		background-color: #f58442;
+		font-weight: bold;
+		font-family: 'Space Mono', monospace;
+
+		margin-top: 5px;
+		margin-bottom: 5px;
+		box-shadow: 2px 2px;
+		font-size: 16px;
+		overflow: hidden;
+		overflow-wrap: break-word;
+		width: 200px;
+		text-align: center;
+		border: none;
+	}
+
 	.img-flag {
 		width: 85%;
 		height: 300px;
@@ -674,6 +703,13 @@ li {
 
 	.quiz {
 		width: 550px;
+	}
+	.correct {
+		background-color: green;
+	}
+
+	.incorrect {
+		background-color: red;
 	}
 }
 </style>
