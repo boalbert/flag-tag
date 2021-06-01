@@ -514,6 +514,7 @@ h3 {
 .quiz {
 	display: flex;
 	width: 100%;
+	max-width: 550px;
 	height: 100%;
 	margin: 0 auto;
 	box-shadow: 7px 7px;
@@ -603,7 +604,7 @@ li {
 	font-size: 16px;
 	overflow: hidden;
 	overflow-wrap: break-word;
-	width: 220px;
+	width: 170px;
 	text-align: center;
 	border: none;
 }
@@ -691,9 +692,17 @@ li {
 		font-size: 16px;
 		overflow: hidden;
 		overflow-wrap: break-word;
-		width: 200px;
+		width: 220px;
 		text-align: center;
 		border: none;
+		outline: none;
+	}
+
+	.button--alternative:active {
+		transform: translateY(1px);
+		box-shadow: 2px 2px;
+		border: none;
+		outline: none;
 	}
 
 	.img-flag {
@@ -706,10 +715,16 @@ li {
 	}
 	.correct {
 		background-color: green;
+		box-shadow: 2px 2px;
+		border: none;
+		outline: none;
 	}
 
 	.incorrect {
 		background-color: red;
+		box-shadow: 2px 2px;
+		border: none;
+		outline: none;
 	}
 }
 </style>
