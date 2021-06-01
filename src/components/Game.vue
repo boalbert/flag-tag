@@ -37,8 +37,10 @@
 
 				<h3>Correct flags: {{ correctAnswer }}</h3>
 			</header>
+
 			<main v-if="!quitGame">
 				<div class="box-flag">
+					<!-- Show timer in challenge-mode -->
 					<p class="timer" v-if="challenge">
 						<i class="far fa-clock"></i> {{ formattedElapsedTime }}
 					</p>
@@ -58,14 +60,17 @@
 					END GAME
 				</button>
 			</main>
+
+			<!-- Shows result when game is finished -->
 			<div v-if="quitGame" class="results">
 				<header>
 					<h2 class="h2-text-result">Result</h2>
 				</header>
-
 				<article class="results-stats-box">
-					<!-- v-if newScore > highScore  -->
-					<div v-if="challenge">
+					<!-- Challenge mode: -->
+					<!-- Player is logged in -->
+					<div v-if="challenge && signedIn">
+						<!-- Beat her old highscore -->
 						<div v-if="showGoodJobPromt">
 							<h2>Wow! New highscore!</h2>
 							<p>
@@ -73,19 +78,44 @@
 								even better!
 							</p>
 						</div>
-
+						<!-- Did not beat her old highscore -->
 						<div v-if="!showGoodJobPromt">
 							<h2>Aww... Try again!</h2>
 							<p>You did not beat your old highscore.</p>
 						</div>
-
-						<!-- <h3>You beat your last highscore!</h3> -->
 					</div>
 
+					<!-- Challenge mode: -->
+					<!-- Player is not logged in -->
+					<div v-else-if="challenge && !signedIn">
+						<!-- Player gets MORE than half questions correct -->
+						<div v-if="this.correctAnswer / this.questionCounter > 0.5">
+							<h2>
+								Good job!
+							</h2>
+							<p>
+								Create an account and log in to save you highscore.
+							</p>
+						</div>
+
+						<!-- Player gets LESS than half questions correct -->
+						<div v-else>
+							<h2>
+								Not impressed...
+							</h2>
+							<p>
+								You might not want to save this score...
+							</p>
+						</div>
+					</div>
+
+					<!-- Practice mode: -->
+					<!-- If player gets MORE than half the questions correct -->
 					<div v-else>
 						<h2 v-if="this.correctAnswer / this.questionCounter > 0.5">
 							Good job! You're on the right track!
 						</h2>
+						<!-- If player gets LESS than half correct-->
 						<h2 v-else>Keep practicing!</h2>
 						<p>
 							Maybe one day you'll get a place on the highscore list? Start a
@@ -95,8 +125,9 @@
 
 					<p><b>Answered questions:</b> {{ questionCounter }}</p>
 					<p><b>Correct answers:</b> {{ correctAnswer }}</p>
-					<p v-if="challenge"><b>Time:</b> {{ formattedElapsedTime }} min(s)</p>
 
+					<!-- Hide score and time when practicing -->
+					<p v-if="challenge"><b>Time:</b> {{ formattedElapsedTime }} min(s)</p>
 					<p v-if="challenge"><b>Total score:</b> {{ totalScore }}p</p>
 				</article>
 
@@ -389,7 +420,7 @@ export default {
 			timer: undefined,
 			totalScore: 0,
 			signedIn: false,
-			showGoodJobPromt: false,
+			showGoodJobPromt: false, // True if player beats her old highscore
 		}
 	},
 	computed: {
