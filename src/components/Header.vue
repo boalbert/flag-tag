@@ -11,11 +11,13 @@
 			><i class="fas fa-user-circle"></i> {{ userName }}</router-link
 		>
 		<router-link to="/register" v-else class="router-links">
-			<i class="fas fa-sign-in-alt"> </i> SIGN IN<span></span>
+			<i class="fas fa-sign-in-alt"></i> SIGN IN<span></span>
 		</router-link>
 		<button class="dark-button" @click="toggleTheme" aria-label="Toggle themes">
-			<span v-if="this.theme === 'darkMode'"> Light</span>
-			<span v-else> Dark</span>
+			<span v-if="this.theme === 'darkMode'">
+				<i class="far fa-moon"></i>
+			</span>
+			<span v-else><i class="fas fa-moon black-icon"></i> </span>
 		</button>
 	</header>
 </template>
@@ -53,7 +55,6 @@ export default {
 			this.theme = this.theme === 'darkMode' ? '' : 'darkMode' //toggles theme value
 			document.documentElement.setAttribute('data-theme', this.theme) // updates the data-theme attribute
 			localStorage.setItem('theme', this.theme) // stores theme value in local storage
-
 		},
 	},
 }
@@ -70,12 +71,10 @@ img {
 }
 
 .router-links {
-	color: #1b4d7a;
 	text-decoration: none;
 	font-size: 18px;
 	padding: 20px;
 	font-family: 'Space Mono', monospace;
-	color: black;
 }
 
 .logo {
@@ -84,13 +83,30 @@ img {
 header {
 	display: flex;
 	flex-direction: column;
-	height: 150px;
+	/* height: 150px; */
 	box-shadow: 7px 7px;
 
 	margin: 0 auto;
 	margin-bottom: 50px;
 	align-items: center;
 	background: linear-gradient(90deg, #125db3 35%, #f5b442 100%);
+}
+
+.dark-button {
+	text-decoration: none;
+	font-size: 20px;
+	padding: 20px;
+	font-family: 'Space Mono', monospace;
+	background: none;
+	border: none;
+}
+.dark-button:hover {
+	background: none;
+	border: none;
+}
+
+.black-icon {
+	color: black;
 }
 
 @media screen and (min-width: 1050px) {
@@ -107,6 +123,9 @@ header {
 		justify-self: flex-start;
 		margin-left: 50px;
 		display: block;
+	}
+	.dark-button {
+		margin-right: 30px;
 	}
 }
 </style>

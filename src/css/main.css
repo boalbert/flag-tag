@@ -51,10 +51,6 @@
     --text-color:#1b4d7a;
     transition: background-color 0.5s ease-in-out;
 }
-.dark-button{
-
-    -webkit-text-fill-color: #f0c273;
-}
 
 [data-theme="darkMode"] {
     /* Colors for dark mode */
@@ -133,29 +129,6 @@
 
 
 html {
-
     background: var(--background-color);
     -webkit-text-fill-color: var(--text-color);
 }
-
-
-
-
-
-.dark-button {
-
-    background-color: #125db3;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    color: #f5b442;
-    border-radius: 5px;
-    margin-right: 10px;
-
-
-}
-.dark-button:hover{
-
-    background-color: #4188d7;
-
-}
-

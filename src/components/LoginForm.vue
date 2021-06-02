@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<i class="fas fa-sign-in-alt icon-signup-signin"></i>
 		<h1>Sign In</h1>
 
 		<!-- Display errors in login-details -->
@@ -117,9 +118,20 @@ input:focus {
 	color: #aa001f;
 }
 
+.icon-signup-signin {
+	display: none;
+}
+
 @media screen and (min-width: 1050px) {
 	.input__container {
 		width: 15rem;
+	}
+
+	.icon-signup-signin {
+		display: block;
+		font-size: 42px;
+		margin-top: 25px;
+		margin-bottom: 0;
 	}
 }
 </style>

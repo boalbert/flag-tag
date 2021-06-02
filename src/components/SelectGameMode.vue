@@ -63,7 +63,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans&display=swap');
 
 p {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Space Mono', monospace;
 	font-size: 14px;
 	line-height: 100%;
 }
