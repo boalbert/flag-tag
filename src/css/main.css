@@ -6,31 +6,34 @@
 }
 
 .about-container{
-    /* Colors for default theme (light-mode) */
 
     background:#faf8f0;
     --text-color:black;
     transition: background-color 0.5s ease-in-out;
 }
 .card-body{
+
     background:#faf8f0;
     --text-color:black;
     transition: background-color 0.5s ease-in-out;
 
 }
 .highscore-container{
+
     background:#faf8f0;
     --text-color:black;
     transition: background-color 0.5s ease-in-out;
 
 }
 .login-registerpage-container{
+
     background:#faf8f0;
     --text-color:black;
     transition: background-color 0.5s ease-in-out;
 
 }
 .card{
+
     background:#faf8f0;
     --text-color:black;
     transition: background-color 0.5s ease-in-out;
@@ -38,19 +41,18 @@
 }
 .game-mode-container{
 
-
     background:white;
     --text-color:#1b4d7a;
     transition: background-color 0.5s ease-in-out;
 }
 .game-container{
 
-
     background: #faf8f0;
     --text-color:#1b4d7a;
     transition: background-color 0.5s ease-in-out;
 }
 .dark-button{
+
     -webkit-text-fill-color: #f0c273;
 }
 
@@ -73,8 +75,8 @@
 [data-theme="darkMode"] h3{
     -webkit-text-fill-color: #faf8f0;
 }
-[data-theme="darkMode"] .about-container{
 
+[data-theme="darkMode"] .about-container{
 
     background: #464749;
     --text-color:#faf8f0;
@@ -109,18 +111,21 @@
 }
 
 [data-theme="darkMode"] .card{
+
     background: #313639;
     --text-color:#1b4d7a;
     transition: background-color 0.5s ease-in-out;
 
 }
 [data-theme="darkMode"] .login-registerpage-container{
+
     background:#464749;
     --text-color:#1b4d7a;
     transition: background-color 0.5s ease-in-out;
 
 }
 [data-theme="darkMode"] .card-left-container{
+
     filter: grayscale(100%);
     transition: filter 0.5s ease-in-out;
 
@@ -128,6 +133,7 @@
 
 
 html {
+
     background: var(--background-color);
     -webkit-text-fill-color: var(--text-color);
 }
@@ -137,6 +143,7 @@ html {
 
 
 .dark-button {
+
     background-color: #125db3;
     font-family: Arial, sans-serif;
     font-weight: bold;
@@ -147,6 +154,7 @@ html {
 
 }
 .dark-button:hover{
+
     background-color: #4188d7;
 
 }
