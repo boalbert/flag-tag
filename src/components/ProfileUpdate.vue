@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="changeName = !changeName" class="change-button">Change username</button>
+    <button @click="changeName = !changeName" class="change-button">Change Username</button>
     <div v-if="errors.length">
       <ul v-for="error in errors" :key="error.param">
         <li class="error">
@@ -91,7 +91,23 @@ form button{
 }
 
 button {
-  color: #f7931e;
+  justify-content: center;
+  color: black;
+  cursor: pointer;
+  list-style: none;
+  height: 65px;
+  background-color: #f58442;
+  font-weight: bold;
+  font-family: 'Space Mono', monospace;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  box-shadow: 2px 2px;
+  font-size: 16px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  width: 150px;
+  text-align: center;
 }
 
 .change-button {
