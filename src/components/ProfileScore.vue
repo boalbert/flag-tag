@@ -63,14 +63,15 @@ export default {
 <style>
 .score-container {
   display: grid;
+  justify-content: center;
   text-align: center;
   grid-template-columns: repeat(3, 100px);
   margin: auto;
-  width: 50%;
+  width: 300px;
   padding: 10px;
   box-shadow: 4px 4px;
   background: linear-gradient(
-      90deg, #125db3 35%, #f5b442 100%);
+      90deg, #125db3 35%, #f58442 100%);
   font-family: "Font Family 5 Free";
   font-weight: 800;
   font-size: 18px;
