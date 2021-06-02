@@ -31,22 +31,23 @@ export default {
 </script>
 
 <style>
-.logout-btn{
-  color: black;
-  cursor: pointer;
-  list-style: none;
-  height: 65px;
-  background-color: #f58442;
-  font-weight: bold;
-  font-family: 'Space Mono', monospace;
-  margin: 0 auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  box-shadow: 2px 2px;
-  font-size: 16px;
-  overflow: hidden;
-  overflow-wrap: break-word;
-  width: 150px;
-  text-align: center;
+.logout-btn {
+	color: black;
+	cursor: pointer;
+	list-style: none;
+	height: 65px;
+	background-color: #f58442;
+	font-weight: bold;
+	font-family: 'Space Mono', monospace;
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	box-shadow: 2px 2px;
+	font-size: 16px;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	width: 150px;
+	text-align: center;
+	border: none;
 }
 </style>
