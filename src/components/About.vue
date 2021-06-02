@@ -21,7 +21,7 @@ export default {
 <style>
 h2 {
 	font-family: 'Space Mono', monospace;
-    font-weight: bold;
+	font-weight: bold;
 	letter-spacing: 5px;
 }
 .about-header {
@@ -38,7 +38,6 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	width: 300px;
-
 	height: 300px;
 }
 ul {

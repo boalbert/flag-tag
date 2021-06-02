@@ -1,9 +1,8 @@
 <template>
-	<!-- Temporär component
-    Ersätt data med data från highscore prop -->
 	<div class="highscore-container">
 		<div class="highscore-header">
 			<h2><i class="fas fa-star"></i> Highscore</h2>
+			<h3>All Regions</h3>
 		</div>
 		<ol>
 			<li v-for="(score, index) in highscore" v-bind:key="index">
@@ -16,10 +15,10 @@
 <script>
 export default {
 	name: 'ListHighScore',
-  data() {
-    return {
-      highscore: Array,
-    }
+	data() {
+		return {
+			highscore: Array,
+		}
 	},
 	methods: {
 		getHighscore() {
@@ -42,11 +41,21 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 h2 {
 	font-family: 'Space Mono', monospace;
-    font-weight: bold;
+	font-weight: bold;
 	letter-spacing: 5px;
+	margin-bottom: 0px;
+}
+
+h3 {
+	font-size: 16px;
+	font-family: 'Space Mono', monospace;
+	font-weight: bold;
+	letter-spacing: 5px;
+	margin-top: 0px;
+	padding-top: 0px;
 }
 .highscore-header {
 	background-color: #f5b442;
@@ -63,7 +72,6 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	width: 300px;
-
 }
 ol {
 	font-family: 'Space Mono', monospace;
