@@ -1,6 +1,6 @@
 :root{
     /* Colors for default theme (light-mode) */
-    --background-color: white;
+    --background-color: #faf8f0;
     --text-color:black;
     transition: background-color 0.5s ease-in-out;
 }
@@ -46,7 +46,7 @@
 .game-container{
 
 
-    background:#faf8f0;
+    background: #faf8f0;
     --text-color:#1b4d7a;
     transition: background-color 0.5s ease-in-out;
 }
@@ -90,7 +90,7 @@
 [data-theme="darkMode"] .game-container{
 
 
-    background: #464749;
+    background: #313639;
     --text-color:#faf8f0;
     transition: background-color 0.5s ease-in-out;
 }
