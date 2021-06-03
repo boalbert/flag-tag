@@ -72,8 +72,20 @@
 				</header>
 				<article class="results-stats-box">
 					<!-- Challenge mode: -->
+					<!-- Answered less than 20 questions -->
+
+					<div v-if="this.questionCounter < 20 && challenge">
+						<!-- Beat her old highscore -->
+						<div>
+							<h2>Pff...</h2>
+							<p>
+								Come on, you need to answer at least 20 questions.
+							</p>
+						</div>
+					</div>
+
 					<!-- Player is logged in -->
-					<div v-if="challenge && signedIn">
+					<div v-if="challenge && signedIn && this.questionCounter === 20">
 						<!-- Beat her old highscore -->
 						<div v-if="showGoodJobPromt">
 							<h2>Wow! New highscore!</h2>
@@ -91,7 +103,9 @@
 
 					<!-- Challenge mode: -->
 					<!-- Player is not logged in -->
-					<div v-else-if="challenge && !signedIn">
+					<div
+						v-else-if="challenge && !signedIn && this.questionCounter === 20"
+					>
 						<!-- Player gets MORE than half questions correct -->
 						<div v-if="this.correctAnswer / this.questionCounter > 0.5">
 							<h2>
@@ -115,7 +129,7 @@
 
 					<!-- Practice mode: -->
 					<!-- If player gets MORE than half the questions correct -->
-					<div v-else>
+					<div v-else-if="!challenge">
 						<h2 v-if="this.correctAnswer / this.questionCounter > 0.5">
 							Good job! You're on the right track!
 						</h2>
@@ -137,7 +151,7 @@
 						<b>Total score:</b> {{ totalScore }}p
 					</p>
 					<p v-if="challenge && this.questionCounter < 20">
-						<b>Total score:</b> You finished to early to say...
+						<b>Total score:</b> You finished too early to say...
 					</p>
 				</article>
 
