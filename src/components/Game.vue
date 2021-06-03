@@ -132,9 +132,13 @@
 
 					<!-- Hide score and time when practicing -->
 					<p v-if="challenge"><b>Time:</b> {{ formattedElapsedTime }} min(s)</p>
-          <!-- Hide calculated score if not challenge completed in full -->
-					<p v-if="challenge && this.questionCounter === 20"><b>Total score:</b> {{ totalScore }}p</p>
-          <p v-if="challenge && this.questionCounter < 20"><b>Total score:</b> You finished to early to say...</p>
+					<!-- Hide calculated score if not challenge completed in full -->
+					<p v-if="challenge && this.questionCounter === 20">
+						<b>Total score:</b> {{ totalScore }}p
+					</p>
+					<p v-if="challenge && this.questionCounter < 20">
+						<b>Total score:</b> You finished to early to say...
+					</p>
 				</article>
 
 				<button class="button--play-again" v-on:click="resetRound">
@@ -190,9 +194,9 @@ export default {
 				this.countryListSplice = [...this.countryListOriginal]
 			}
 
-			if(this.countryListSplice-length < 1){
-        this.countryListSplice = [...this.countryListOriginal]
-      }
+			if (this.countryListSplice - length < 1) {
+				this.countryListSplice = [...this.countryListOriginal]
+			}
 
 			let index = Math.floor(Math.random() * this.countryListSplice.length)
 
@@ -201,7 +205,6 @@ export default {
 		},
 
 		async createRegionQuestion(region) {
-
 			if (this.regionList.length === 0) {
 				this.selectedRegion = region
 				this.regionList = await this.getCountriesByRegion(region)
@@ -214,9 +217,9 @@ export default {
 				this.countryListSplice = [...this.regionList]
 			}
 
-			if(this.countryListSplice.length < 1){
-        this.countryListSplice = [...this.regionList]
-      }
+			if (this.countryListSplice.length < 1) {
+				this.countryListSplice = [...this.regionList]
+			}
 
 			let index = Math.floor(Math.random() * this.countryListSplice.length)
 
@@ -245,17 +248,14 @@ export default {
 		},
 
 		calculateTotalScore() {
-		  //Time bonus suggestion. Timebonus starts at 8000p and is counted down by 99p every second
-      //This will generate a maximum timebonus of aprox 5000p (25% of maximum questions score).
-      let timeBonus = 8000 - ((this.elapsedTime / 1000) *99)
-      if(timeBonus < 0)
-        timeBonus = 0
+			//Time bonus suggestion. Timebonus starts at 8000p and is counted down by 99p every second
+			//This will generate a maximum timebonus of aprox 5000p (25% of maximum questions score).
+			let timeBonus = 8000 - (this.elapsedTime / 1000) * 99
+			if (timeBonus < 0) timeBonus = 0
 
-      let calculatedScore =
-          (this.correctAnswer * 999) + timeBonus
-      this.totalScore = calculatedScore.toFixed(0)
-
-    },
+			let calculatedScore = this.correctAnswer * 999 + timeBonus
+			this.totalScore = calculatedScore.toFixed(0)
+		},
 
 		resetRound() {
 			this.correctAnswer = 0
@@ -313,9 +313,15 @@ export default {
 				let highscores = JSON.parse(localStorage.getItem('highScore'))
 				// If in challange-mode AND new highscore is better than old highscore
 				// POST to database
-				if (this.challenge && highscores[this.selectedRegion] < newHighScore && this.questionCounter === 20) {
-					console.log("I challenge, bättre poäng och skall ha svarat på 20 frågor?")
-				  this.showGoodJobPromt = true
+				if (
+					this.challenge &&
+					highscores[this.selectedRegion] < newHighScore &&
+					this.questionCounter === 20
+				) {
+					console.log(
+						'I challenge, bättre poäng och skall ha svarat på 20 frågor?'
+					)
+					this.showGoodJobPromt = true
 					highscores[this.selectedRegion] = newHighScore
 					localStorage.setItem('highScore', JSON.stringify(highscores))
 					this.postHighScore(this.totalScore)
