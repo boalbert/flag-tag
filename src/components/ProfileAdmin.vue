@@ -1,11 +1,11 @@
 <template>
   <div class="admin-container">
     <div class="resetAllHighscores">
-      <button @click="resetClick= !resetClick" class="menu-button">Reset Highscore All regions</button>
+      <button @click="resetClick= !resetClick" class="menu-button">Reset highscore All regions</button>
       <div v-if="resetClick" class="resetAll">
         <p v-if="!resetSuccess">Are you sure?</p>
         <p v-if="resetSuccess">Reset successful</p>
-        <button @click="resetAllRegions">Yes!</button>
+        <button @click="resetAllRegions" class="cancel-resetAll-button">Yes</button>
         <button @click="resetClick = false" class="cancel-resetAll-button">Cancel</button>
       </div>
     </div>
@@ -21,7 +21,7 @@
               name="userNameToReset"
               v-model.trim="userNameToReset"
           />
-          <button type="submit"> Reset players highscore</button>
+          <button type="submit" class="cancel-reset-button"> Reset players highscore</button>
         </form>
         <button @click="resetOneCheck" class="cancel-reset-button">Cancel</button>
       </div>
@@ -38,7 +38,7 @@
               name="userNameToDelete"
               v-model.trim="userNameToDelete"
           />
-          <button type="submit"> Delete Account</button>
+          <button type="submit" class="cancel-delete-button"> Delete Account</button>
         </form>
         <button @click="deleteAccountCheck" class="cancel-delete-button">Cancel</button>
       </div>
@@ -137,23 +137,40 @@ export default {
 }
 
 button {
-  padding: 8px;
-  margin: 5px;
+  color: black;
+  cursor: pointer;
+  list-style: none;
+  background-color: #f58442;
+  font-weight: bold;
+  font-family: 'Space Mono', monospace;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 8px;
+  box-shadow: 2px 2px;
+  font-size: 16px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-align: center;
+  border: none;
 }
 
 .cancel-reset-button {
   margin-top: -5px;
-  margin-bottom: 20px;
   width: 165px;
+  height: 50px;
 }
 
 .cancel-resetAll-button {
   margin-bottom: 20px;
+  margin-right: 10px;
+  height: 50px;
+  width: 80px;
 }
 
 .cancel-delete-button {
   margin-top: -5px;
-  width: 105px;
+  width: 165px;
+  height: 50px;
 }
 
 form {
@@ -165,12 +182,21 @@ form {
 }
 
 input {
-  padding: 10px;
-  margin-bottom: 5px;
+  height: 35px;
+  border: 2px solid rgb(238, 237, 237);
+  border: 1px solid gray;
+  margin-bottom: 25px;
+  padding: 5px;
+  font-size: 18px;
+  box-shadow: 2px 2px;
 }
 
 .menu-button {
-  width: 250px;
+  width: 300px;
+  height: 65px;
 }
 
+p{
+  font-size: 18px;
+}
 </style>
