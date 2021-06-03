@@ -5,8 +5,8 @@
       <div v-if="resetClick" class="resetAll">
         <p v-if="!resetSuccess">Are you sure?</p>
         <p v-if="resetSuccess">Reset successful</p>
-        <button @click="resetAllRegions" class="cancel-resetAll-button">Yes</button>
-        <button @click="resetClick = false" class="cancel-resetAll-button">Cancel</button>
+        <button @click="resetAllRegions" class="resetAll-buttons">Yes</button>
+        <button @click="resetClick = false" class="resetAll-buttons">Cancel</button>
       </div>
     </div>
     <div class="resetOneHighscore">
@@ -21,9 +21,9 @@
               name="userNameToReset"
               v-model.trim="userNameToReset"
           />
-          <button type="submit" class="cancel-reset-button"> Reset players highscore</button>
+          <button type="submit" class="resetone-button"> Reset players highscore</button>
         </form>
-        <button @click="resetOneCheck" class="cancel-reset-button">Cancel</button>
+        <button @click="resetOneCheck" class="resetone-button">Cancel</button>
       </div>
     </div>
     <div class="deleteOneAccount">
@@ -38,9 +38,9 @@
               name="userNameToDelete"
               v-model.trim="userNameToDelete"
           />
-          <button type="submit" class="cancel-delete-button"> Delete Account</button>
+          <button type="submit" class="deleteone-button"> Delete Account</button>
         </form>
-        <button @click="deleteAccountCheck" class="cancel-delete-button">Cancel</button>
+        <button @click="deleteAccountCheck" class="deleteone-button">Cancel</button>
       </div>
     </div>
   </div>
@@ -136,6 +136,40 @@ export default {
   justify-content: space-evenly;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+form input {
+  padding: 5px;
+  height: 40px;
+  justify-content: center;
+  color: black;
+  cursor: pointer;
+  list-style: none;
+  font-weight: bold;
+  font-family: 'Space Mono', monospace;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 2px 2px;
+  font-size: 16px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  width: 150px;
+  text-align: center;
+  border: none;
+}
+
+p{
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+}
+
 button {
   color: black;
   cursor: pointer;
@@ -154,49 +188,27 @@ button {
   border: none;
 }
 
-.cancel-reset-button {
-  margin-top: -5px;
-  width: 165px;
-  height: 50px;
+.menu-button {
+  width: 300px;
+  height: 65px;
 }
 
-.cancel-resetAll-button {
+.resetAll-buttons {
   margin-bottom: 20px;
   margin-right: 10px;
   height: 50px;
   width: 80px;
 }
 
-.cancel-delete-button {
+.resetone-button {
   margin-top: -5px;
   width: 165px;
   height: 50px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
-
-input {
-  height: 35px;
-  border: 2px solid rgb(238, 237, 237);
-  border: 1px solid gray;
-  margin-bottom: 25px;
-  padding: 5px;
-  font-size: 18px;
-  box-shadow: 2px 2px;
-}
-
-.menu-button {
-  width: 300px;
-  height: 65px;
-}
-
-p{
-  font-size: 18px;
+.deleteone-button {
+  margin-top: -5px;
+  width: 165px;
+  height: 50px;
 }
 </style>
