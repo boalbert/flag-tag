@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="logged-in">
 		<p>Logged in as {{userInfo.userName}} </p>
 		
 	</div>
@@ -31,4 +31,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.logged-in{
+  font-family: 'Space Mono', monospace;
+}
+</style>

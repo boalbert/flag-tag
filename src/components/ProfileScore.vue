@@ -64,9 +64,9 @@ export default {
 	display: grid;
 	justify-content: center;
 	text-align: center;
-	grid-template-columns: repeat(3, 100px);
+	grid-template-columns: repeat(3, 150px);
 	margin: auto;
-	width: 300px;
+	width: 450px;
 	padding: 10px;
 	box-shadow: 4px 4px;
 	background: linear-gradient(90deg, #125db3 35%, #f58442 100%);
