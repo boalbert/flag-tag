@@ -82,7 +82,7 @@ export default {
 							0
 						)
 
-						if (this.localStorage.getItem('tempRegion') != null)
+						if (localStorage.getItem('tempRegion') != null)
 							this.postHighScore(
 								localStorage.getItem('tempHighscore'),
 								localStorage.getItem('tempRegion')

@@ -4,9 +4,16 @@
 			<h2><i class="fas fa-info-circle"></i> About</h2>
 		</div>
 		<ul>
-			<li>The creators of this game is Helena, Sean, Albert, Peter and Oskar</li>
-			<li>With the help of <a href="https://restcountries.eu/">Rescountries.eu</a></li>
-			<li>To play against friends send them the link: <a href="http://flagtag.boalbert.se">http://flagtag.boalbert.se</a></li>
+			<li>
+				The creators of this game is Helena, Sean, Albert, Peter and Oskar
+			</li>
+			<li>
+				With the help of <a href="https://restcountries.eu/">Rescountries.eu</a>
+			</li>
+			<li>
+				To play against friends send them the link:
+				<a href="http://flagtag.boalbert.se">http://flagtag.boalbert.se</a>
+			</li>
 		</ul>
 	</div>
 </template>
@@ -37,7 +44,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	width: 300px;
-	height: 310px;
+	height: 330px;
 }
 ul {
 	font-family: 'Space Mono', monospace;
