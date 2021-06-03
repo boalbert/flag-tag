@@ -44,7 +44,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	width: 300px;
-	height: 310px;
+	height: 330px;
 }
 ul {
 	font-family: 'Space Mono', monospace;

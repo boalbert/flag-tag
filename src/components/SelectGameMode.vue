@@ -31,7 +31,7 @@
 					<p>
 						Time to test your skills!
 
-						<strong>20 flags</strong> from all regions. Guess them
+						<strong>20 flags!</strong> Guess them
 						<strong>all</strong> and guess them <strong>fast!</strong>
 					</p>
 				</div>
@@ -44,11 +44,6 @@
 				</router-link>
 			</div>
 		</article>
-
-		<!-- 
-		<router-link to="/challengepage">
-			<button>Challenge</button>
-		</router-link> -->
 	</section>
 </template>
 
