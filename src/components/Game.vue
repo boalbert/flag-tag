@@ -300,7 +300,8 @@ export default {
 
 			// If user is not logged in
 			// Save highscore and region as temp variables in localstorage
-			if (!this.signedIn) {
+			if (!this.signedIn && this.challenge) {
+				console.log('Saving tempHighscore and tempRegion to localStorage.')
 				localStorage.setItem('tempHighscore', this.totalScore)
 				localStorage.setItem('tempRegion', this.selectedRegion)
 
