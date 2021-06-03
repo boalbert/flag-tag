@@ -75,6 +75,7 @@ img {
 	font-size: 18px;
 	padding: 20px;
 	font-family: 'Space Mono', monospace;
+	color: black;
 }
 
 .logo {
