@@ -27,12 +27,12 @@
 			<div class="card-body">
 				<div class="card-left-container"></div>
 				<div class="card-right-container">
-					<p><strong>“Use your swag to brag in FlagTag!</strong></p>
+					<p><strong>Use your swag to brag in FlagTag!</strong></p>
 					<p>
 						Time to test your skills!
 
-						<strong>20 flags!</strong> Guess them
-						<strong>all</strong> and guess them <strong>fast!</strong>
+						<strong>20 flags!</strong> Guess them <strong>all</strong> and guess
+						them <strong>fast!</strong>
 					</p>
 				</div>
 			</div>
