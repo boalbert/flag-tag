@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button @click="changeName = !changeName" class="change-button">
+		<button @click="change" class="change-button">
 			Change Username
 		</button>
 		<div v-if="errors.length">
@@ -42,6 +42,10 @@ export default {
 	},
 
 	methods: {
+	  change(){
+      this.changeName = !this.changeName
+      this.errors = ''
+    },
 		submitNewUsername(newUsername) {
 			this.errors = ''
 			let userId = localStorage.getItem('userId')
@@ -133,7 +137,9 @@ button {
 }
 
 .error {
-	color: #b00020;
+  font-family: 'Space Mono', monospace;
 	list-style: none;
+  font-size: 16px;
+  text-align: center;
 }
 </style>
